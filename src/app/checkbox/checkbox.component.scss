@@ -1,0 +1,50 @@
+@import "variables";
+@import "utils";
+
+.checkbox {
+  @include size(20px);
+  margin: 6px;
+
+  &__label {
+    display: inline-flex;
+    align-items: flex-start;
+  }
+
+  &__input {
+    @include invisible;
+  }
+
+  &__box {
+    flex-shrink: 0;
+    @include size(20px);
+
+    border: solid {
+      color: $dark-50;
+      radius: 4px;
+      width: 1px;
+    }
+    background-color: whitesmoke;
+    transition: .3s;
+  }
+
+  &__input:checked + &__box {
+    background: { //значок cheсk завёрнут в svg (градиент)
+      image: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.46439 2.40768L5.70703 6.65032L4.29282 8.06453L0.0501771 3.82189L1.46439 2.40768Z' fill='%23AAA'/%3E%3Cpath d='M8.53546 0.993466L9.94967 2.40768L4.29282 8.06453L2.8786 6.65032L8.53546 0.993466Z' fill='%23AAA'/%3E%3C/svg%3E");
+      repeat: no-repeat;
+      position: 50% 50%;
+    }
+    border-color: $purple-color;
+  }
+
+  &__input:focus + &__box {
+    border-color: $dark-50;
+  }
+
+  &__input:disabled + &__box {
+    border-color: $purple-color;
+  }
+
+  &__input:disabled:checked + &__box { //значок cheсk завёрнут в svg (серый цвет #AAA)
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='9' viewBox='0 0 10 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.46439 2.40768L5.70703 6.65032L4.29282 8.06453L0.0501771 3.82189L1.46439 2.40768Z' fill='%23AAA'/%3E%3Cpath d='M8.53546 0.993466L9.94967 2.40768L4.29282 8.06453L2.8786 6.65032L8.53546 0.993466Z' fill='%23AAA'/%3E%3C/svg%3E");
+  }
+}

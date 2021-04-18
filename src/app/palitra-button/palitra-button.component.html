@@ -1,0 +1,21 @@
+<div (click)="button_palitra.unactive_visual_mode = !button_palitra.unactive_visual_mode"
+     (dblclick)="button_palitra.color = '#000088'"
+     (mouseenter)="button_palitra.opacity_mode = !button_palitra.opacity_mode"
+     *ngIf="button_palitra.content !== 'visual_check'; else checkbox"
+
+     [id]="button_palitra.id"
+     [ngClass]="[
+      class_name,
+      position,
+      button_palitra.opacity_mode ? opacity_button : '',
+      button_palitra.unactive_visual_mode ? unactive_visual_button : ''
+      ]"
+     [ngStyle]="{'background-color' : button_palitra.color}"
+     [title]="button_palitra.title"
+>
+  {{button_palitra.content}}</div>
+
+<ng-template #checkbox>
+  <app-checkbox [button_check]="button_palitra"></app-checkbox>
+</ng-template>
+

@@ -94,6 +94,11 @@
             "styles": [
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/stylings"
+              ]
+            },
             "scripts": []
           }
         },
@@ -123,6 +128,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "mandalas-fst"
+    }
+  },
+  "defaultProject": "mandalas-fst",
+  "cli": {
+    "analytics": "e44b712e-296e-4e54-8b27-d11a545fdfae"
+  }
 }

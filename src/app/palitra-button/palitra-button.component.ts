@@ -1,0 +1,27 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {Buttons} from "../shared/buttons.service";
+
+@Component({
+  selector: 'app-palitra-button',
+  templateUrl: './palitra-button.component.html',
+  styleUrls: ['./palitra-button.component.scss']
+})
+
+export class PalitraButtonComponent implements OnInit {
+
+@Input() localButton : Buttons
+  position: string
+  class_name: string = 'palitra_button'
+  // opacity_mode: boolean = false
+  // unactive_visual_mode: boolean = false
+  opacity_button: string = 'opacity_button'
+  unactive_visual_button: string = 'unactive_visual_button'
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    this.localButton.position = this.localButton.position || ''
+  }
+
+}
