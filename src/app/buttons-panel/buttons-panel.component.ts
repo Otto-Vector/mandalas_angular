@@ -8,9 +8,11 @@ import {ButtonsService} from "../shared/buttons.service";
 })
 export class ButtonsPanelComponent implements OnInit {
 
-  constructor(private buttons : ButtonsService) { }
+  constructor(public buttons : ButtonsService) {
+  }
 
   ngOnInit(): void {
+
   }
 
 }

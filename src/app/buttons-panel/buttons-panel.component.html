@@ -1,5 +1,17 @@
-<div>
-  <app-palitra-button
-  *ngFor="let iterButton of ButtonsService.buttons"
-  [button_palitra]= "iterButton"></app-palitra-button>
+<div class="button_panel">
+
+  <div class="left_panel">
+    <ng-component *ngTemplateOutlet="forButton; context: {left: true} "></ng-component>
+  </div>
+
+  <div class="right_panel">
+    <ng-component *ngTemplateOutlet="forButton; context: {left: false}"></ng-component>
+  </div>
+
+<ng-template #forButton let-Left="left">
+    <ng-container *ngFor="let iterButton of buttons.buttons">
+      <app-palitra-button *ngIf="iterButton.left && Left" [localButton]="iterButton">  </app-palitra-button>
+      <app-palitra-button *ngIf="!iterButton.left && !Left" [localButton]="iterButton">  </app-palitra-button>
+    </ng-container>
+</ng-template>
 </div>
