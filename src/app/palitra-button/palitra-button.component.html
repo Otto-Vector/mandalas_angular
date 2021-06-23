@@ -10,23 +10,15 @@
       localButton.unactive_visual_mode ? unactive_visual_button : ''
      ]"
 
-    (click)="localButton.help = !localButton.help"
+    (click)="buttonListener()"
 >
   {{localButton.content}}
-<ng-component *ngTemplateOutlet="help"></ng-component>
+
+  <app-help-descriptors [localButton]="localButton"></app-help-descriptors>
+
 </div>
 
 <ng-template #checkbox>
-  <app-checkbox [button_check]="localButton"></app-checkbox>
+  <app-checkbox [button_check]="localButton"> </app-checkbox>
 </ng-template>
 
-<ng-template #help>
-  <div [ngClass]="[
-    help_class,
-    localButton.left ? help_left : help_right,
-    localButton.help ? 'active' : ''
-    ]"
-
-  >
-    {{localButton.title}}</div>
-</ng-template>

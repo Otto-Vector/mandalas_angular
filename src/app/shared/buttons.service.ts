@@ -26,7 +26,7 @@ export class ButtonsService {
       id: 'num0', title: '0', content: '0'
     },
     {
-      help: true, left : true, color: this.color, unactive_visual_mode: false, opacity_mode: false,
+      help: false, left : true, color: this.color, unactive_visual_mode: false, opacity_mode: false,
       id: 'num1', title: '1', content: '1'
     },
     {

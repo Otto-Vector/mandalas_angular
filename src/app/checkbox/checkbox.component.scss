@@ -2,6 +2,7 @@
 @import "utils";
 
 .checkbox {
+  position: relative;
   @include size(20px);
   margin: 6px;
 

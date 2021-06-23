@@ -27,7 +27,7 @@
     transition: 0.3s;
 
     &:hover {
-      //color: rgb(77, 102, 126);
+      color: rgb(77, 102, 126);
     }
 
     &.opacity_button {
@@ -39,39 +39,6 @@
       border-radius: 50%;
       box-shadow: 0 0 4px;
       color: white;
-  }
-
-  .help {
-      position: absolute;
-      top: 0;
-      user-select: none;
-      hyphens: none;
-      white-space: nowrap;
-      //background: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.3)75%, rgba(0,0,0,0)90% );
-      transform: scaleX(0);
-      transition: 0.5s;
-      transition-timing-function: cubic-bezier(1,1,0,1);
-
-    &:hover {
-      color: black;
-    }
-
-    &_left {
-      left: 40px;
-      text-align: left;
-      transform-origin: left;
-    }
-
-    &_right
-    {
-      right: 40px;
-      text-align: right;
-      transform-origin: right;
-    }
-
-    &.active {
-      transform: scaleX(1);
-    }
   }
 
 }

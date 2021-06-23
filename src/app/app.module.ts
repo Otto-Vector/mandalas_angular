@@ -8,6 +8,7 @@ import { TitleComponent } from "./title/title.component";
 import { PalitraButtonComponent } from './palitra-button/palitra-button.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ButtonsPanelComponent } from './buttons-panel/buttons-panel.component';
+import { HelpDescriptorsComponent } from './help-descriptors/help-descriptors.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ButtonsPanelComponent } from './buttons-panel/buttons-panel.component';
     TitleComponent,
     PalitraButtonComponent,
     CheckboxComponent,
-    ButtonsPanelComponent
+    ButtonsPanelComponent,
+    HelpDescriptorsComponent
   ],
   imports: [
     BrowserModule,

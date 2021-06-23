@@ -9,9 +9,8 @@
   </div>
 
 <ng-template #forButton let-Left="left">
-    <ng-container *ngFor="let iterButton of buttons.buttons">
-      <app-palitra-button *ngIf="iterButton.left && Left" [localButton]="iterButton">  </app-palitra-button>
-      <app-palitra-button *ngIf="!iterButton.left && !Left" [localButton]="iterButton">  </app-palitra-button>
-    </ng-container>
+  <ng-container *ngFor="let iterButton of buttons.buttons">
+    <app-palitra-button *ngIf="iterButton.left === Left" [localButton]="iterButton">  </app-palitra-button>
+  </ng-container>
 </ng-template>
 </div>
