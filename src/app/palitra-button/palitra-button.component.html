@@ -10,7 +10,7 @@
       localButton.unactive_visual_mode ? unactive_visual_button : ''
      ]"
 
-    (click)="buttonListener()"
+    (click)="actions.buttonListener(localButton)"
 >
   {{localButton.content}}
 

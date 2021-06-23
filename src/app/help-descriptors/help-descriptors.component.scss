@@ -1,15 +1,16 @@
 .help {
       position: absolute;
-      top: 0;
+      top: 1px;
+
+      color: black;
+      font-weight: bold;
       user-select: none;
-      hyphens: none;
       white-space: nowrap;
+
       //background: radial-gradient(rgba(255,255,255,1), rgba(255,255,255,0.3)75%, rgba(0,0,0,0)90% );
       transform: scaleX(0);
       transition: 0.5s;
       transition-timing-function: cubic-bezier(1,1,0,1);
-
-      font-weight: bold;
 
     &:hover {
       //color: black;
