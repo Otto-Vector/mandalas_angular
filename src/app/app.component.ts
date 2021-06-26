@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
@@ -7,8 +7,10 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title: string = 'mandalas-fibonacci';
   public max_input_length = 25
 
+  ngOnInit(): void {
+  }
 }

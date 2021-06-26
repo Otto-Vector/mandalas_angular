@@ -10,6 +10,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ButtonsPanelComponent } from './buttons-panel/buttons-panel.component';
 import { HelpDescriptorsComponent } from './help-descriptors/help-descriptors.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,7 @@ import { HelpDescriptorsComponent } from './help-descriptors/help-descriptors.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]

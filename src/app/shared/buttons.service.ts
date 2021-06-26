@@ -1,5 +1,6 @@
 
 import {Injectable} from "@angular/core";
+import {ValuesService} from "./values.service";
 
 
 export interface Buttons {
@@ -17,10 +18,10 @@ export interface Buttons {
 @Injectable({providedIn: "root"})
 
 export class ButtonsService {
-constructor() {
+constructor( public colors : ValuesService) {
 }
   color: string = '#e9e9e9'
-
+  green: string = "#f05"
   //переключает логические поля внутри активного элемента по ключу
   //второй параметр устанавливает ключ в значение себя
   mode( mode:string, bool?:boolean ):boolean {
@@ -45,7 +46,7 @@ constructor() {
     }
 }
 
-  // max_input_length: number = 25
+
   buttons: Buttons[] = [
     {
       help: false, left : true, color: this.color, unactive_visual_mode: false, opacity_mode: false,
@@ -188,4 +189,14 @@ constructor() {
       sw_mode : this.mode
     },
   ]
+
+  //окрашивание кнопок
+  colored() {
+  for (let [i,{id,content}] of this.buttons.entries()) {
+    //окрашивание кнопок с цифрами
+    if (/^num\d$/.test(id)) {
+      this.buttons[i].color = this.colors.BASE_colors[+content]
+    }
+  }
+  }
 }
