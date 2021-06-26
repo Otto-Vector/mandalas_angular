@@ -15,14 +15,20 @@ export class ActionsService {
   }
 
   buttonListener(local) {
+    //упрощаем обращение с массивом
     let buttons : Buttons[] = this.globalBtn.buttons
+
+
     //нажатие кнопок отображения помощи справа и слева
     if (['r_help', 'l_help'].includes(local.id)) {
-      local.unactive_visual_mode = !local.unactive_visual_mode
+      local.sw_mode('unactive_visual_mode')
+      local.sw_mode(false)
 
-      for (let [i,{left,help}] of buttons.entries()) {
+
+      for (let [i,{left}] of buttons.entries()) {
         if (left === local.left) {
-          buttons[i].help = !help
+          // @ts-ignore
+          buttons[i].sw_mode('help')
         }
       }
 
@@ -30,9 +36,11 @@ export class ActionsService {
 
     //смена сторон панелей
     if (local.id === 'sw_panels') {
-      local.unactive_visual_mode = !local.unactive_visual_mode
+      //смена состояния кнопки
+      local.sw_mode('unactive_visual_mode')
       for (let i = 0; i < buttons.length; i++) {
-        buttons[i].left = !buttons[i].left
+        // @ts-ignore
+        buttons[i].sw_mode('left')
       }
     }
   }
