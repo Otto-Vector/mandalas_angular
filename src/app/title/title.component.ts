@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core'
-import {AppComponent} from "../app.component";
+import {Component, OnInit} from '@angular/core'
 import {HistoryService} from "../shared/history.service";
 import {ValuesService} from "../shared/values.service";
 
@@ -16,7 +15,7 @@ export class TitleComponent implements OnInit {
 
 
   title : string = this.history.title_input.value
-  number  = this.title.length
+  number : string | number  = this.title.length
   max_input_length = this.fromGlobal.max_input_length
 
   ngOnInit(): void {

@@ -1,7 +1,10 @@
 
 import {Injectable} from "@angular/core";
 
-
+export interface SelectedValue {
+  value: string
+  content: string
+}
 
 @Injectable({providedIn: "root"})
 
@@ -33,5 +36,42 @@ export class ValuesService {
 //   //максимальное количество символов вводимой строки
   max_input_length : number = 33
 //   //максимальное количество знаков на расширение
-  max_expansion_length : number = 45 //было 57
+//  max_expansion_length : number = 45 //было 57
+
+
+  selected_mandala : SelectedValue[] = [
+   {
+      value: '4',
+      content: 'квадрат (по три)'
+    },
+    {
+      value: '2',
+      content: 'квадрат (по три) =11='
+    },
+    {
+      value: '3',
+      content: 'квадрат (по три) "ромб"'
+    },
+    {
+      value: '5',
+      content: 'квадрат (по три) "ромб" =11='
+    },
+    {
+      value: '8',
+      content: 'квадрат шахматный расчёт (1вар)'
+    },
+    {
+      value: '9',
+      content: 'квадрат шахматный расчёт (2вар)'
+    },
+    {
+      value: '6',
+      content: 'квадрат шахматный расчёт (1вар) =11='
+    },
+    {
+      value: '7',
+      content: 'квадрат шахматный расчёт (2вар) =11='
+    }
+  ]
+
 }

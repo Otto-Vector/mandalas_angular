@@ -1,12 +1,16 @@
 <header class="title">
 <div id="number_of_symbols_box">
-  <input id="number_of_symbols" #number_of_symbols type="text"
-         [(ngModel)]="number" [min]=1 [max]="max_input_length" >
-<!--         decimal="true" placeholder="00" >-->
-<!--            (keydown) = "onlyDigits($event)" >-->
-  <div id="number_of_symbols__clear" (click)="number=0; number_of_symbols.focus()"></div>
+
+  <input type="text" id="number_of_symbols" #number_of_symbols
+         [(ngModel)] ="number"
+         inputmode="numeric"
+         pattern="[0-9]*"
+         [min]=1 [max]="max_input_length"
+         [title]="'min value = 1; max value = '+max_input_length"
+         digitOnly>
+  <div id="number_of_symbols__clear" (click)="number=''; number_of_symbols.focus()"></div>
 </div>
 <input id="title_input" #title_input name="f0" [(ngModel)]="title" type="text" (ngModelChange)="fixValue(title)" [maxLength]="max_input_length">
 <!--<input name="ff" [(ngModel)]="title" type="text" (ngModelChange)="fixValue()" [maxLength]="max_input_length">-->
-  <button id="clear_button" (click)="clearTitle(); title_input.focus()"></button>
+  <button id="clear_button" (click)="clearTitle(); title_input.focus()" ></button>
 </header>
