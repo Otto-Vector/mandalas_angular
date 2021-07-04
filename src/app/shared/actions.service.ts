@@ -6,7 +6,7 @@ import {Buttons, ButtonsService} from "./buttons.service";
 @Injectable({providedIn: "root"})
 
 export class ActionsService {
-  constructor( public globalBtn : ButtonsService
+  constructor(public globalBtn: ButtonsService
   ) {
   }
 
@@ -16,7 +16,7 @@ export class ActionsService {
 
   buttonListener(local) {
     //упрощаем обращение с массивом
-    let buttons : Buttons[] = this.globalBtn.buttons
+    let buttons: Buttons[] = this.globalBtn.buttons
 
 
     //нажатие кнопок отображения помощи справа и слева
@@ -25,7 +25,7 @@ export class ActionsService {
       local.sw_mode(false)
 
 
-      for (let [i,{left}] of buttons.entries()) {
+      for (let [i, {left}] of buttons.entries()) {
         if (left === local.left) {
           // @ts-ignore
           buttons[i].sw_mode('help')
@@ -42,6 +42,13 @@ export class ActionsService {
         // @ts-ignore
         buttons[i].sw_mode('left')
       }
+    }
+
+    if (local.id === 'colors_shema') {
+      //смена состояния кнопки
+      local.sw_mode('unactive_visual_mode')
+      let shema = !local.unactive_visual_mode ? 'main' : 'second'
+      this.globalBtn.colored(shema)
     }
   }
 }

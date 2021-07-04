@@ -21,7 +21,8 @@ export class PalitraButtonComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.localButton.position = this.localButton.position || ''
+    // this.localButton.position = this.localButton.position ||
+
   }
 
 

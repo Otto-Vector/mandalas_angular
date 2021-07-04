@@ -191,11 +191,11 @@ constructor( public colors : ValuesService) {
   ]
 
   //окрашивание кнопок
-  colored() {
+  colored(shema) {
   for (let [i,{id,content}] of this.buttons.entries()) {
     //окрашивание кнопок с цифрами
     if (/^num\d$/.test(id)) {
-      this.buttons[i].color = this.colors.BASE_colors[+content]
+      this.buttons[i].color = this.colors.BaseColor[shema][+content]
     }
   }
   }

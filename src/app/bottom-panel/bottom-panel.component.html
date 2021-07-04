@@ -6,7 +6,8 @@
     <span>0</span>
   </button>
   <label class="select_mandala_type" for="select_mandala_type">
-    <select class="bg_arrow_down" id="select_mandala_type" name="select_mandala_type">
+    <select [(ngModel)]="select_now" (ngModelChange)="ngOnInit()"
+            class="bg_arrow_down" id="select_mandala_type" name="select_mandala_type">
       <option *ngFor = "let iterSelect of selected_value"
               [value]= "iterSelect.value">
         {{iterSelect.content}}</option>

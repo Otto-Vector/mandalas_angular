@@ -1,3 +1,8 @@
 @import "reset";
 @import "variables";
 @import "utils";
+//для элементов select и для статистики
+.bg_arrow_down {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' fill='%23fff' fill-rule='evenodd'%3e%3cpath d='M.5 1l4.75 5L10 1z' fill='%23989da1' stroke='%23989da1'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+}
