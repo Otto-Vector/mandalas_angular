@@ -1,12 +1,14 @@
 
 import {Injectable} from "@angular/core";
 import {Buttons, ButtonsService} from "./buttons.service";
+import {ValuesService} from "./values.service";
 
 
 @Injectable({providedIn: "root"})
 
 export class ActionsService {
-  constructor(public globalBtn: ButtonsService
+  constructor(public globalBtn: ButtonsService,
+              public colorR : ValuesService
   ) {
   }
 
@@ -47,8 +49,8 @@ export class ActionsService {
     if (local.id === 'colors_shema') {
       //смена состояния кнопки
       local.sw_mode('unactive_visual_mode')
-      let shema = !local.unactive_visual_mode ? 'main' : 'second'
-      this.globalBtn.colored(shema)
+      this.colorR.shema = !local.unactive_visual_mode ? 'main' : 'second'
+      this.globalBtn.colored(this.colorR.shema)
     }
   }
 }

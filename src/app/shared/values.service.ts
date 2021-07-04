@@ -1,5 +1,5 @@
 
-import {Injectable} from "@angular/core";
+import {DoCheck, Injectable} from "@angular/core";
 
 export interface BaseColor {
   main   : string[]
@@ -9,7 +9,7 @@ export interface BaseColor {
 
 @Injectable({providedIn: "root"})
 
-export class ValuesService {
+export class ValuesService implements DoCheck{
 
   BaseColor : BaseColor = {
     main : [
@@ -44,6 +44,13 @@ export class ValuesService {
 
 //   //максимальное количество знаков на расширение
 //  max_expansion_length : number = 45 //было 57
+  shema :string = 'second'
+
+
+  ngDoCheck(): void {
+    //this.checkPosition = ValuesService.shema;
+    console.log('sheMA'+this.shema)
+  }
 }
 
 

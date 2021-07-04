@@ -18,34 +18,8 @@ export interface Buttons {
 @Injectable({providedIn: "root"})
 
 export class ButtonsService {
-constructor( public colors : ValuesService) {
-}
+
   color: string = '#e9e9e9'
-  green: string = "#f05"
-  //переключает логические поля внутри активного элемента по ключу
-  //второй параметр устанавливает ключ в значение себя
-  mode( mode:string, bool?:boolean ):boolean {
-    //создание массива ключей с логическим содержимым
-    let keysArr :string[] = []
-    for (let key in this) { if (typeof this[key] === 'boolean') keysArr.push(key)}
-
-    try {
-      //проверка правильности написания ключа переключения
-      if (keysArr.includes(mode)) {
-
-        //проверка на применение второго параметра bool
-        (typeof bool === 'undefined') ? this[mode] = !this[mode] : this[mode] = bool
-
-        return this[mode]
-      } else {
-        throw new SyntaxError("Данные лог.переключателя некорректры. Должны быть:" + keysArr.join(" "));
-      }
-    } catch(e) {
-      console.log(e)
-      return undefined
-    }
-}
-
 
   buttons: Buttons[] = [
     {
@@ -190,6 +164,32 @@ constructor( public colors : ValuesService) {
     },
   ]
 
+  constructor( public colors : ValuesService) {
+    this.colored(colors.shema)
+  }
+  //переключает логические поля внутри активного элемента по ключу
+  //второй параметр устанавливает ключ в значение себя
+  mode( mode:string, bool?:boolean ):boolean {
+    //создание массива ключей с логическим содержимым
+    let keysArr :string[] = []
+    for (let key in this) { if (typeof this[key] === 'boolean') keysArr.push(key)}
+
+    try {
+      //проверка правильности написания ключа переключения
+      if (keysArr.includes(mode)) {
+
+        //проверка на применение второго параметра bool
+        (typeof bool === 'undefined') ? this[mode] = !this[mode] : this[mode] = bool
+
+        return this[mode]
+      } else {
+        throw new SyntaxError("Данные лог.переключателя некорректры. Должны быть:" + keysArr.join(" "));
+      }
+    } catch(e) {
+      console.log(e)
+      return undefined
+    }
+}
   //окрашивание кнопок
   colored(shema) {
   for (let [i,{id,content}] of this.buttons.entries()) {

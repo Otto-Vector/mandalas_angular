@@ -12,10 +12,12 @@ export class BottomPanelComponent implements OnInit {
 
   selected_value : SelectedValue [] = this.glValue.selected_mandala
   select_now : string = this.selected_value[1].value
+
   ngOnInit(): void {
     // console.log(this.select_now)
   }
+
   run() {
-    console.log(this.select_now)
+    // console.log(this.select_now)
   }
 }

@@ -12,7 +12,7 @@ export class ButtonsPanelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.buttons.colored('main')
+    // this.buttons.colored('main')
   }
 
 }
