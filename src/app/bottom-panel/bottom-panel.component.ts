@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectedValue, SelectService} from "../shared/select.service";
+import {HistoryService} from "../shared/history.service";
 
 @Component({
   selector: 'app-bottom-panel',
@@ -8,10 +9,12 @@ import {SelectedValue, SelectService} from "../shared/select.service";
 })
 export class BottomPanelComponent implements OnInit {
 
-  constructor( private glValue : SelectService) { }
+  constructor(
+    private selected : SelectService,
+    private history : HistoryService) { }
 
-  selected_value : SelectedValue [] = this.glValue.selected_mandala
-  select_now : string = this.selected_value[1].value
+  selected_value : SelectedValue [] = this.selected.selected_mandala
+  select_now : string = this.history.history_default.selected_mandala
 
   ngOnInit(): void {
     // console.log(this.select_now)

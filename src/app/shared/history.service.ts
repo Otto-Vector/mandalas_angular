@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import {SelectService} from "./select.service";
 
 export interface History {
-  selected_mandala: number
+  selected_mandala: string
   title_of_mandala: string
   length_of_title: number
   dots_mode: boolean
@@ -21,11 +22,15 @@ export interface History {
 
 export class HistoryService {
 
-  constructor() { }
-  color :string = 'green'
+  constructor(
+    private selectedValue : SelectService
+  ) {
+
+  }
   title_input : any = {value: "mandala"}
+
   history_default : History = {
-          selected_mandala  : 4,
+          selected_mandala  : this.selectedValue.selected_mandala[0].value,
           title_of_mandala  : this.title_input.value,
           length_of_title 	: this.title_input.value.length,
           dots_mode 				: false,

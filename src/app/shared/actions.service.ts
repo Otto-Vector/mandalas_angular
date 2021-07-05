@@ -1,14 +1,16 @@
 
 import {Injectable} from "@angular/core";
 import {Buttons, ButtonsService} from "./buttons.service";
-import {ValuesService} from "./values.service";
+import {ColorService} from "./color.service";
+import {HistoryService} from "./history.service";
 
 
 @Injectable({providedIn: "root"})
 
 export class ActionsService {
-  constructor(public globalBtn: ButtonsService,
-              public colorR : ValuesService
+  constructor(private globalBtn: ButtonsService,
+              private color : ColorService,
+              private history: HistoryService
   ) {
   }
 
@@ -49,8 +51,33 @@ export class ActionsService {
     if (local.id === 'colors_shema') {
       //смена состояния кнопки
       local.sw_mode('unactive_visual_mode')
-      this.colorR.shema = !local.unactive_visual_mode ? 'main' : 'second'
-      this.globalBtn.colored(this.colorR.shema)
+
+      if (!this.history.history_default.gray_mode) {
+        // @ts-ignore
+        this.history.history_default.swich_mode('second_gray_mode')
+        this.color.setShema = !this.history.history_default.second_gray_mode ? 'gray' : 'gray2'
+      } else {
+        // @ts-ignore
+        this.history.history_default.swich_mode('second_color_mode')
+        this.color.setShema = !this.history.history_default.second_color_mode ? 'main' : 'second'
+      }
+
+      this.globalBtn.colored(this.color.getShema)
+    }
+
+    if (local.id === 'gray_shema') {
+      //смена состояния кнопки
+      local.sw_mode('unactive_visual_mode')
+      // @ts-ignore
+      this.history.history_default.swich_mode('gray_mode')
+      if (!this.history.history_default.gray_mode) {
+        this.color.setShema = !this.history.history_default.second_color_mode ? 'gray' : 'gray2'
+      } else {
+        this.color.setShema = !this.history.history_default.second_color_mode ? 'main' : 'second'
+      }
+      this.globalBtn.colored(this.color.getShema)
     }
   }
+
+
 }
