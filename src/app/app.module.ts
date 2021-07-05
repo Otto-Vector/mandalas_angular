@@ -13,6 +13,8 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { ButtonsPanelComponent } from './buttons-panel/buttons-panel.component';
 import { HelpDescriptorsComponent } from './help-descriptors/help-descriptors.component';
 import { BottomPanelComponent } from './bottom-panel/bottom-panel.component';
+import { SceneComponent } from './scene/scene.component';
+
 
 
 
@@ -24,7 +26,8 @@ import { BottomPanelComponent } from './bottom-panel/bottom-panel.component';
     CheckboxComponent,
     ButtonsPanelComponent,
     HelpDescriptorsComponent,
-    BottomPanelComponent
+    BottomPanelComponent,
+    SceneComponent
   ],
   imports: [
     BrowserModule,

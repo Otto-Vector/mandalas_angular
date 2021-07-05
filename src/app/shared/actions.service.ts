@@ -21,7 +21,7 @@ export class ActionsService {
   buttonListener(local) {
     //упрощаем обращение с массивом
     let buttons: Buttons[] = this.globalBtn.buttons
-
+    let history = this.history.history_default
 
     //нажатие кнопок отображения помощи справа и слева
     if (['r_help', 'l_help'].includes(local.id)) {
@@ -50,33 +50,49 @@ export class ActionsService {
 
     if (local.id === 'colors_shema') {
       //смена состояния кнопки
-      local.sw_mode('unactive_visual_mode')
 
-      if (!this.history.history_default.gray_mode) {
+      if (history.gray_mode) {
         // @ts-ignore
-        this.history.history_default.swich_mode('second_gray_mode')
-        this.color.setShema = !this.history.history_default.second_gray_mode ? 'gray' : 'gray2'
+        history.swich_mode('second_gray_mode')
+        this.color.setShema = !history.second_gray_mode ? 'gray' : 'gray2'
       } else {
         // @ts-ignore
-        this.history.history_default.swich_mode('second_color_mode')
-        this.color.setShema = !this.history.history_default.second_color_mode ? 'main' : 'second'
+        history.swich_mode('second_color_mode')
+        this.color.setShema = !history.second_color_mode ? 'main' : 'second'
       }
 
       this.globalBtn.colored(this.color.getShema)
+
     }
 
     if (local.id === 'gray_shema') {
-      //смена состояния кнопки
-      local.sw_mode('unactive_visual_mode')
+
       // @ts-ignore
-      this.history.history_default.swich_mode('gray_mode')
-      if (!this.history.history_default.gray_mode) {
-        this.color.setShema = !this.history.history_default.second_color_mode ? 'gray' : 'gray2'
+      history.swich_mode('gray_mode')
+      if (history.gray_mode) {
+        this.color.setShema = !history.second_gray_mode ? 'gray' : 'gray2'
       } else {
-        this.color.setShema = !this.history.history_default.second_color_mode ? 'main' : 'second'
+        this.color.setShema = !history.second_color_mode ? 'main' : 'second'
       }
       this.globalBtn.colored(this.color.getShema)
+
     }
+
+    //пересборка визуализации. пока вот такой костыль на этом уровне Angular
+    function reView(){
+      let face = {}
+      for (const [i, {id}] of buttons.entries()) { face[id] = i }
+      // @ts-ignore
+      buttons[face['colors_shema']].sw_mode('unactive_visual_mode',
+        (!history.gray_mode && history.second_color_mode)
+        ||
+        (history.gray_mode && history.second_gray_mode)
+      )
+      // @ts-ignore
+      buttons[face['gray_shema']].sw_mode('unactive_visual_mode', history.gray_mode)
+    }
+
+    reView()
   }
 
 
