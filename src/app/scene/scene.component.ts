@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import * as THREE from 'three';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {SceneService} from './scene.service';
 
 @Component({
   selector: 'app-scene',
@@ -7,14 +7,16 @@ import * as THREE from 'three';
   styleUrls: ['./scene.component.scss']
 })
 export class SceneComponent implements OnInit {
-    private renderer: THREE.WebGLRenderer;
-    private camera: THREE.PerspectiveCamera;
-    private cameraTarget: THREE.Vector3;
-    public scene: THREE.Scene;
 
-  constructor() { }
+  @ViewChild('rendererCanvas', {static: true})
+  public rendererCanvas: ElementRef<HTMLCanvasElement>;
 
-  ngOnInit(): void {
+  public constructor(private engServ: SceneService) {
+  }
+
+  public ngOnInit(): void {
+    this.engServ.createScene(this.rendererCanvas);
+    this.engServ.animate();
   }
 
 }

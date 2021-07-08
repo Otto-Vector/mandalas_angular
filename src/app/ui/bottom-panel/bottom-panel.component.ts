@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SelectedValue, SelectService} from "../shared/select.service";
-import {HistoryService} from "../shared/history.service";
+import {SelectedValue, SelectService} from "../../shared/select.service";
+import {HistoryService} from "../../shared/history.service";
 
 @Component({
   selector: 'app-bottom-panel',

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+// import {ValuesService} from "./values.service";
 // import {ActionsService} from "./actions.service";
 
 
@@ -9,6 +10,10 @@ export interface BaseColor {
   gray2  : string[]
 }
 
+// export interface shemaInput {
+//   shema: string
+//   todo: object
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -34,12 +39,16 @@ export class ColorService {
     ]
   }
 
+  //переменная определения цветовой схемы
   static shema: string = 'main'
 
 
   constructor(
-    // private action : ActionsService
+    // private values : ValuesService
   ) {
+
+    // this.buttons = values.buttonSrv
+
     this.BaseColor.second = [
       this.BaseColor.main[0],
       this.BaseColor.main[9], this.BaseColor.main[1], this.BaseColor.main[2],
@@ -55,11 +64,13 @@ export class ColorService {
     ]
   }
 
+  //возвращает массив BaseColor[shema]
   get getShema() {
-    return ColorService.shema
+    return this.BaseColor[ColorService.shema]
   }
 
   set setShema(input: string) {
+    //проверочный массив цветовых схем
     let keys: string[] = []
     for (let key in this.BaseColor) {
       keys.push(key)
@@ -67,7 +78,7 @@ export class ColorService {
 
     if (keys.includes(input)) {
       ColorService.shema = input
-      // this.action.colored_buttons(this.getShema)
+      // input.todo(this.getShema)
     }
   }
 

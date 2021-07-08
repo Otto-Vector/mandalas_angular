@@ -1,6 +1,6 @@
 <header class="title">
-<div id="number_of_symbols_box">
 
+  <div id="number_of_symbols_box">
   <input type="text" id="number_of_symbols" #number_of_symbols
          [(ngModel)] ="number"
          inputmode="numeric"
@@ -10,7 +10,11 @@
          digitOnly>
   <div id="number_of_symbols__clear" (click)="number=''; number_of_symbols.focus()"></div>
 </div>
-<input id="title_input" #title_input name="f0" [(ngModel)]="title" type="text" (ngModelChange)="fixValue(title)" [maxLength]="max_input_length">
-<!--<input name="ff" [(ngModel)]="title" type="text" (ngModelChange)="fixValue()" [maxLength]="max_input_length">-->
+
+  <input type="text" id="title_input" #title_input
+         [(ngModel)]="title"
+         (ngModelChange)="fixValue(title)"
+         [maxLength]="max_input_length">
   <button id="clear_button" (click)="clearTitle(); title_input.focus()" ></button>
+
 </header>

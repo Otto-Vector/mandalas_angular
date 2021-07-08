@@ -1,19 +1,22 @@
 
 import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {RouterModule} from "@angular/router";
 
 import { DigitOnlyModule } from "@uiowa/digit-only";
 
 import { AppComponent } from './app.component';
-import { TitleComponent } from "./title/title.component";
-import { PalitraButtonComponent } from './palitra-button/palitra-button.component';
-import { CheckboxComponent } from './checkbox/checkbox.component';
-import { ButtonsPanelComponent } from './buttons-panel/buttons-panel.component';
-import { HelpDescriptorsComponent } from './help-descriptors/help-descriptors.component';
-import { BottomPanelComponent } from './bottom-panel/bottom-panel.component';
+
+import { TitlePanelComponent } from './ui/title-panel/title-panel.component';
+import { ButtonsPanelComponent } from './ui/buttons-panel/buttons-panel.component';
+import { PalitraButtonComponent } from './ui/buttons-panel/palitra-button/palitra-button.component';
+import { CheckboxComponent } from './ui/buttons-panel/checkbox/checkbox.component';
+import { HelpDescriptorsComponent } from './ui/buttons-panel/help-descriptors/help-descriptors.component';
+import { BottomPanelComponent } from './ui/bottom-panel/bottom-panel.component';
+
 import { SceneComponent } from './scene/scene.component';
+import { UiComponent } from './ui/ui.component';
 
 
 
@@ -21,22 +24,25 @@ import { SceneComponent } from './scene/scene.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TitleComponent,
+    TitlePanelComponent,
+    ButtonsPanelComponent,
     PalitraButtonComponent,
     CheckboxComponent,
-    ButtonsPanelComponent,
     HelpDescriptorsComponent,
     BottomPanelComponent,
-    SceneComponent
+    UiComponent,
+    SceneComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule,
     RouterModule,
     DigitOnlyModule,
   ],
   providers: [AppComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {
+
+}

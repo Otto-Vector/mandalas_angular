@@ -1,8 +1,6 @@
 
 import {Injectable} from "@angular/core";
-import {ColorService} from "./color.service";
-
-
+import {BaseColor} from "./color.service";
 
 export interface Buttons {
   id: string
@@ -165,12 +163,15 @@ export class ButtonsService {
     },
   ]
 
+  private colors : any
+
   constructor(
-    private colors : ColorService
+
   ) {
     //автоматический покрас при инициализации класса
     // colors.setShema = colors.getShema
-    this.colored(colors.getShema)
+    // this.colors = values.colorSrv
+    // this.colored(this.colors.getShema)
   }
   //переключает логические поля внутри активного элемента по ключу
   //второй параметр устанавливает ключ в значение себя
@@ -196,13 +197,13 @@ export class ButtonsService {
       return undefined
     }
 }
+
   //окрашивание кнопок
-  colored(shema) {
+  colored(shema : BaseColor) : void {
     for (let [i,{id,content}] of this.buttons.entries()) {
       //окрашивание кнопок с цифрами
       if (/^num\d$/.test(id)) {
-        this.buttons[i].color = this.colors.BaseColor[shema][+content]
-
+        this.buttons[i].color = shema[+content]
       }
     }
   }

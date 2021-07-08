@@ -12,6 +12,8 @@ export class ActionsService {
               private color : ColorService,
               private history: HistoryService
   ) {
+    //покрас кнопок при инициализации
+    this.globalBtn.colored(this.color.getShema)
   }
 
   default() {
@@ -75,7 +77,6 @@ export class ActionsService {
         this.color.setShema = !history.second_color_mode ? 'main' : 'second'
       }
       this.globalBtn.colored(this.color.getShema)
-
     }
 
     //пересборка визуализации. пока вот такой костыль на этом уровне Angular
@@ -86,7 +87,7 @@ export class ActionsService {
       buttons[face['colors_shema']].sw_mode('unactive_visual_mode',
         (!history.gray_mode && history.second_color_mode)
         ||
-        (history.gray_mode && history.second_gray_mode)
+        ( history.gray_mode && history.second_gray_mode )
       )
       // @ts-ignore
       buttons[face['gray_shema']].sw_mode('unactive_visual_mode', history.gray_mode)

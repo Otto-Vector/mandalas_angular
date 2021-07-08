@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Buttons} from "../shared/buttons.service";
+import {Buttons} from "../../../shared/buttons.service";
 
 
 @Component({

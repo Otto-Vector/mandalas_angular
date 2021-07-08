@@ -1,0 +1,9 @@
+.ui-wrapper {
+  position: absolute;
+  top: 0;
+  height: 99%;
+
+  * {
+    z-index: 10;
+  }
+}

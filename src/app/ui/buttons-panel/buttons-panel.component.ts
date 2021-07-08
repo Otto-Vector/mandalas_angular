@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ButtonsService} from "../shared/buttons.service";
+import {ButtonsService} from "../../shared/buttons.service";
 
 @Component({
   selector: 'app-buttons-panel',
@@ -10,6 +10,7 @@ export class ButtonsPanelComponent implements OnInit {
 
   constructor(public buttons : ButtonsService) {
   }
+
 
   ngOnInit(): void {
     // this.buttons.colored('main')

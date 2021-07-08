@@ -6,8 +6,8 @@ import {Injectable} from "@angular/core";
 
 export class ValuesService{
 
-constructor(
 
+  constructor(
 ) {
 }
 //   //максимальное количество символов вводимой строки

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Buttons} from "../shared/buttons.service";
-import {ActionsService} from "../shared/actions.service";
+import {Buttons} from "../../../shared/buttons.service";
+import {ActionsService} from "../../../shared/actions.service";
 
 @Component({
   selector: 'app-palitra-button',
