@@ -48,7 +48,7 @@ export class SceneService implements OnDestroy {
 
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.listenToKeyEvents(this.canvas)
+    // this.controls.listenToKeyEvents(this.canvas)
     //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
 
     this.controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
@@ -67,7 +67,8 @@ export class SceneService implements OnDestroy {
     this.scene.add(this.light);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+    const randColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    const material = new THREE.MeshBasicMaterial({color: randColor});
     this.cube = new THREE.Mesh(geometry, material);
     this.scene.add(this.cube);
 

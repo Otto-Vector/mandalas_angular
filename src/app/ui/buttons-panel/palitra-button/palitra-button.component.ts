@@ -14,10 +14,11 @@ export class PalitraButtonComponent implements OnInit {
   class_name: string = 'palitra_button'
   opacity_button: string = 'opacity_button'
   unactive_visual_button: string = 'unactive_visual_button'
+  action
 
 
-  constructor( public actions : ActionsService) {
-
+  constructor( private readonly actionsService : ActionsService) {
+      this.action  = actionsService
   }
 
   ngOnInit(): void {

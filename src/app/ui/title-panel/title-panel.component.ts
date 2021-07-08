@@ -9,18 +9,17 @@ import {HistoryService} from "../../shared/history.service";
 })
 export class TitlePanelComponent implements OnInit {
 
-  constructor(private fromGlobal: ValuesService,
+  constructor(private readonly valuesService: ValuesService,
   public history : HistoryService) {}
 
 
   title : string = this.history.title_input.value
   number : string | number  = this.title.length
-  max_input_length = this.fromGlobal.max_input_length
+  max_input_length = this.valuesService.max_input_length
 
   ngOnInit(): void {
 
   }
-
 
   fixValue(title) {
     this.title = title.trim()

@@ -1,19 +1,22 @@
 
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {Buttons, ButtonsService} from "./buttons.service";
 import {ColorService} from "./color.service";
 import {HistoryService} from "./history.service";
 
 
 @Injectable({providedIn: "root"})
+export class ActionsService implements OnInit{
 
-export class ActionsService {
-  constructor(private globalBtn: ButtonsService,
-              private color : ColorService,
-              private history: HistoryService
+  constructor(private readonly globalBtn: ButtonsService,
+              private readonly colorService : ColorService,
+              private readonly history: HistoryService
   ) {
     //покрас кнопок при инициализации
-    this.globalBtn.colored(this.color.getShema)
+    // this.colorService.setSchema('main')
+  }
+  ngOnInit(): void {
+
   }
 
   default() {
@@ -56,14 +59,14 @@ export class ActionsService {
       if (history.gray_mode) {
         // @ts-ignore
         history.swich_mode('second_gray_mode')
-        this.color.setShema = !history.second_gray_mode ? 'gray' : 'gray2'
+        this.colorService.setSchema(!history.second_gray_mode ? 'gray' : 'gray2')
       } else {
         // @ts-ignore
         history.swich_mode('second_color_mode')
-        this.color.setShema = !history.second_color_mode ? 'main' : 'second'
+        this.colorService.setSchema(!history.second_color_mode ? 'main' : 'second')
       }
 
-      this.globalBtn.colored(this.color.getShema)
+      // this.globalBtn.colored(this.colorService.getShema)
 
     }
 
@@ -72,11 +75,11 @@ export class ActionsService {
       // @ts-ignore
       history.swich_mode('gray_mode')
       if (history.gray_mode) {
-        this.color.setShema = !history.second_gray_mode ? 'gray' : 'gray2'
+        this.colorService.setSchema(!history.second_gray_mode ? 'gray' : 'gray2')
       } else {
-        this.color.setShema = !history.second_color_mode ? 'main' : 'second'
+        this.colorService.setSchema(!history.second_color_mode ? 'main' : 'second')
       }
-      this.globalBtn.colored(this.color.getShema)
+      // this.globalBtn.colored(this.colorService.getShema)
     }
 
     //пересборка визуализации. пока вот такой костыль на этом уровне Angular

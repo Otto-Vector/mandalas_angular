@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-// import {ValuesService} from "./values.service";
-// import {ActionsService} from "./actions.service";
+import {Injectable, OnInit} from '@angular/core';
+import {Subject} from "rxjs";
+
 
 
 export interface BaseColor {
@@ -10,15 +10,9 @@ export interface BaseColor {
   gray2  : string[]
 }
 
-// export interface shemaInput {
-//   shema: string
-//   todo: object
-// }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ColorService {
+@Injectable({providedIn: 'root'})
+export class ColorService implements OnInit{
 
   BaseColor : BaseColor = {
     main : [
@@ -40,14 +34,13 @@ export class ColorService {
   }
 
   //переменная определения цветовой схемы
-  static shema: string = 'main'
+  private shema = new Subject<string[]>()
+  public schema$ = this.shema.asObservable();
 
 
   constructor(
     // private values : ValuesService
   ) {
-
-    // this.buttons = values.buttonSrv
 
     this.BaseColor.second = [
       this.BaseColor.main[0],
@@ -64,22 +57,25 @@ export class ColorService {
     ]
   }
 
-  //возвращает массив BaseColor[shema]
-  get getShema() {
-    return this.BaseColor[ColorService.shema]
+  ngOnInit(): void {
+
   }
 
-  set setShema(input: string) {
-    //проверочный массив цветовых схем
+  //возвращает массив BaseColor[shema]
+  get getSchema() {
+    return this.BaseColor.main
+  }
+
+  public setSchema(schema : string) {
+
     let keys: string[] = []
     for (let key in this.BaseColor) {
       keys.push(key)
     }
-
-    if (keys.includes(input)) {
-      ColorService.shema = input
-      // input.todo(this.getShema)
+    if (keys.includes(schema)) {
+      this.shema.next(this.BaseColor[schema])
     }
   }
+
 
 }

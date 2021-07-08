@@ -1,6 +1,7 @@
 
-import {Injectable} from "@angular/core";
-import {BaseColor} from "./color.service";
+import {Injectable, OnDestroy, OnInit} from "@angular/core";
+import {ColorService} from "./color.service";
+import {Subscription} from "rxjs";
 
 export interface Buttons {
   id: string
@@ -16,7 +17,7 @@ export interface Buttons {
 
 @Injectable({providedIn: "root"})
 
-export class ButtonsService {
+export class ButtonsService implements OnInit, OnDestroy{
 
   color_of: string = '#e9e9e9'
 
@@ -163,16 +164,34 @@ export class ButtonsService {
     },
   ]
 
-  private colors : any
+  private subs: Subscription;
 
   constructor(
+    private colorService : ColorService
 
   ) {
     //автоматический покрас при инициализации класса
-    // colors.setShema = colors.getShema
-    // this.colors = values.colorSrv
-    // this.colored(this.colors.getShema)
+        this.colored(colorService.getSchema)
+        this.subs = this.colorService.schema$.subscribe((schema) => {
+          this.colored(schema)
+        })
   }
+
+  ngOnInit(): void {
+    // console.log("OnInit")
+    // this.colorService.setSchema("main")
+    // this.subs = this.colorService.schema$.subscribe((schema) => {
+    //   console.log("subsriber WORKS! "+schema)
+    //   // this.colored(schema)
+    // }
+    // )
+  }
+
+  ngOnDestroy(): void {
+    console.log("Destroy WORKS")
+    this.subs.unsubscribe();
+  }
+
   //переключает логические поля внутри активного элемента по ключу
   //второй параметр устанавливает ключ в значение себя
   mode( mode:string, bool?:boolean ):boolean {
@@ -199,8 +218,10 @@ export class ButtonsService {
 }
 
   //окрашивание кнопок
-  colored(shema : BaseColor) : void {
+  private colored(shema : string[]) : void {
+
     for (let [i,{id,content}] of this.buttons.entries()) {
+
       //окрашивание кнопок с цифрами
       if (/^num\d$/.test(id)) {
         this.buttons[i].color = shema[+content]

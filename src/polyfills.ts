@@ -1,3 +1,6 @@
+//three.js fix for angular zone.js
+import './ngzone-flags'
+
 /***************************************************************************************************
  * Load `$localize` onto the global scope - used if i18n tags appear in Angular templates.
  */
