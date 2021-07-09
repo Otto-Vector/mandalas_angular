@@ -7,9 +7,8 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UiComponent implements OnInit {
 
-  // @Input() ui = this.uiHTML
-
-  constructor() { }
+  constructor( ) {
+  }
 
   ngOnInit(): void {
   }

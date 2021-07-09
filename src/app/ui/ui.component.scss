@@ -1,9 +1,10 @@
-.ui-wrapper {
+#ui-wrapper {
   position: absolute;
   top: 0;
-  height: 99%;
+  height: 0%;
+  z-index: 15;
 
-  * {
-    z-index: 10;
-  }
+  //* {
+  //  z-index: 12;
+  //}
 }
