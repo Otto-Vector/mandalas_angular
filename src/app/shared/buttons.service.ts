@@ -171,7 +171,7 @@ export class ButtonsService implements OnInit, OnDestroy{
 
   ) {
     //автоматический покрас при инициализации класса
-        this.colored(colorService.getSchema)
+    //     this.colored(colorService.getSchema)
         this.subs = this.colorService.schema$.subscribe((schema) => {
           this.colored(schema)
         })

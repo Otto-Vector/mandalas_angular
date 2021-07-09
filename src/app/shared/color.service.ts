@@ -1,7 +1,8 @@
-import {Injectable, OnInit} from '@angular/core';
-import {Subject} from "rxjs";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
 
 
+// type colorString [] = {}
 
 export interface BaseColor {
   main   : string[]
@@ -12,7 +13,7 @@ export interface BaseColor {
 
 
 @Injectable({providedIn: 'root'})
-export class ColorService implements OnInit{
+export class ColorService {
 
   BaseColor : BaseColor = {
     main : [
@@ -33,8 +34,10 @@ export class ColorService implements OnInit{
     ]
   }
 
-  //переменная определения цветовой схемы
-  private shema = new Subject<string[]>()
+  //переменная определения цветовой схемы и её начальное значение
+  private shema = new BehaviorSubject<string[]>(
+    this.BaseColor.main
+  )
   public schema$ = this.shema.asObservable();
 
 
@@ -55,15 +58,15 @@ export class ColorService implements OnInit{
       this.BaseColor.gray[5], this.BaseColor.gray[4], this.BaseColor.gray[3],
       this.BaseColor.gray[2], this.BaseColor.gray[1], this.BaseColor.gray[0]
     ]
+
+    // this.setSchema('main')
+    // console.log(this.shema)
   }
 
-  ngOnInit(): void {
 
-  }
-
-  //возвращает массив BaseColor[shema]
-  get getSchema() {
-    return this.BaseColor.main
+  //возвращает массив BaseColor[schema]
+  get getSchema() : string[] {
+    return this.shema.getValue()
   }
 
   public setSchema(schema : string) {
