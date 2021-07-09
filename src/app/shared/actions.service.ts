@@ -36,7 +36,6 @@ export class ActionsService implements OnInit{
 
       for (let [i, {left}] of buttons.entries()) {
         if (left === local.left) {
-          // @ts-ignore
           buttons[i].sw_mode('help')
         }
       }
@@ -48,7 +47,6 @@ export class ActionsService implements OnInit{
       //смена состояния кнопки
       local.sw_mode('unactive_visual_mode')
       for (let i = 0; i < buttons.length; i++) {
-        // @ts-ignore
         buttons[i].sw_mode('left')
       }
     }
@@ -57,16 +55,12 @@ export class ActionsService implements OnInit{
       //смена состояния кнопки
 
       if (history.gray_mode) {
-        // @ts-ignore
         history.swich_mode('second_gray_mode')
-        this.colorService.setSchema(!history.second_gray_mode ? 'gray' : 'gray2')
+        this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
       } else {
-        // @ts-ignore
         history.swich_mode('second_color_mode')
-        this.colorService.setSchema(!history.second_color_mode ? 'main' : 'second')
+        this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
       }
-
-      // this.globalBtn.colored(this.colorService.getShema)
 
     }
 
@@ -75,11 +69,11 @@ export class ActionsService implements OnInit{
       // @ts-ignore
       history.swich_mode('gray_mode')
       if (history.gray_mode) {
-        this.colorService.setSchema(!history.second_gray_mode ? 'gray' : 'gray2')
+        this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
       } else {
-        this.colorService.setSchema(!history.second_color_mode ? 'main' : 'second')
+        this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
       }
-      // this.globalBtn.colored(this.colorService.getShema)
+
     }
 
     //пересборка визуализации. пока вот такой костыль на этом уровне Angular

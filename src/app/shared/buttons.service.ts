@@ -1,7 +1,8 @@
 
-import {Injectable, OnDestroy, OnInit} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {ColorService} from "./color.service";
 import {Subscription} from "rxjs";
+import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
 
 export interface Buttons {
   id: string
@@ -12,12 +13,11 @@ export interface Buttons {
   opacity_mode: boolean
   unactive_visual_mode: boolean
   help: boolean,
-  sw_mode: object
+  sw_mode: (string, boolean?) => boolean
 }
 
 @Injectable({providedIn: "root"})
-
-export class ButtonsService implements OnInit, OnDestroy{
+export class ButtonsService {
 
   color_of: string = '#e9e9e9'
 
@@ -177,20 +177,11 @@ export class ButtonsService implements OnInit, OnDestroy{
         })
   }
 
-  ngOnInit(): void {
-    // console.log("OnInit")
-    // this.colorService.setSchema("main")
-    // this.subs = this.colorService.schema$.subscribe((schema) => {
-    //   console.log("subsriber WORKS! "+schema)
-    //   // this.colored(schema)
-    // }
-    // )
-  }
-
-  ngOnDestroy(): void {
-    console.log("Destroy WORKS")
-    this.subs.unsubscribe();
-  }
+  //отписка от слушания переменной
+  // ngOnDestroy(): void {
+  //   console.log("Destroy WORKS")
+  //   this.subs.unsubscribe();
+  // }
 
   //переключает логические поля внутри активного элемента по ключу
   //второй параметр устанавливает ключ в значение себя

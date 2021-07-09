@@ -15,7 +15,7 @@ export interface History {
   second_color_mode: boolean
   gray_mode: boolean
   second_gray_mode: boolean
-  swich_mode: object
+  swich_mode: (string) => boolean
 }
 
 @Injectable({ providedIn: 'root' })

@@ -2,13 +2,18 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
 
-// type colorString [] = {}
+type typeTenColors = [
+  string,
+  string,string,string,
+  string,string,string,
+  string,string,string
+]
 
 export interface BaseColor {
-  main   : string[]
-  second : string[]
-  gray   : string[]
-  gray2  : string[]
+  main   : typeTenColors
+  second : typeTenColors
+  gray   : typeTenColors
+  gray2  : typeTenColors
 }
 
 
@@ -23,6 +28,7 @@ export class ColorService {
       "#47B3E7", "#2A4B9B", "#702283"
     ],
     second : [
+      '','','','','','','','','',''
     ],
     gray : [
       "#FFFFFF",
@@ -31,13 +37,16 @@ export class ColorService {
       "#383838", "#1C1C1C", "#000000"
     ],
     gray2 : [
+      '','','','','','','','','',''
     ]
   }
 
-  //переменная определения цветовой схемы и её начальное значение
-  private shema = new BehaviorSubject<string[]>(
+  //переменная определения цветовой схемы
+  private shema = new BehaviorSubject<typeTenColors>(
+    //и её начальное значение
     this.BaseColor.main
   )
+  //делаем переменную безопасно отслеживаемой
   public schema$ = this.shema.asObservable();
 
 
@@ -59,26 +68,15 @@ export class ColorService {
       this.BaseColor.gray[2], this.BaseColor.gray[1], this.BaseColor.gray[0]
     ]
 
-    // this.setSchema('main')
-    // console.log(this.shema)
   }
 
-
-  //возвращает массив BaseColor[schema]
-  get getSchema() : string[] {
+  //возвращает массив type colorsTypeArr
+  get getSchema() : typeTenColors {
     return this.shema.getValue()
   }
 
-  public setSchema(schema : string) {
-
-    let keys: string[] = []
-    for (let key in this.BaseColor) {
-      keys.push(key)
-    }
-    if (keys.includes(schema)) {
-      this.shema.next(this.BaseColor[schema])
-    }
+  set setSchema(schema : keyof BaseColor) {
+    this.shema.next(this.BaseColor[schema])
   }
-
 
 }
