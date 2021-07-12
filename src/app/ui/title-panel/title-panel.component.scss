@@ -1,11 +1,11 @@
 @import "../../../styles/variables";
 
 header.title {
-    //position: relative;
+    position: relative;
     //top: 0;
     //z-index: 15;
     background: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.1),rgba(0,0,0,0));
-    width: 100%;
+    width: 100vw;
 }
 
 #title_input, #number_of_symbols {
@@ -62,7 +62,7 @@ header.title {
     right: 1.5%;
     z-index: 15;
 
-    width: 4%;
+    width: 4vw;
     height: 5vw;
 
     margin-top: 1vw;
@@ -77,10 +77,10 @@ header.title {
     cursor: pointer;
 }
 
-@media (max-width:900px){
+@media (min-width:800px){
 
     #clear_button {
-        width: 7%;
+        width: 7vw;
         height: 6vw;
     }
 }

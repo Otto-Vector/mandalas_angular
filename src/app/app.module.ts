@@ -13,7 +13,7 @@ import { ButtonsPanelComponent } from './ui/buttons-panel/buttons-panel.componen
 import { PalitraButtonComponent } from './ui/buttons-panel/palitra-button/palitra-button.component';
 import { CheckboxComponent } from './ui/buttons-panel/checkbox/checkbox.component';
 import { HelpDescriptorsComponent } from './ui/buttons-panel/help-descriptors/help-descriptors.component';
-import { BottomPanelComponent } from './ui/bottom-panel/bottom-panel.component';
+import { FooterPanelComponent } from './ui/footer-panel/footer-panel.component';
 
 import { SceneComponent } from './scene/scene.component';
 import { UiComponent } from './ui/ui.component';
@@ -29,7 +29,7 @@ import { UiComponent } from './ui/ui.component';
     PalitraButtonComponent,
     CheckboxComponent,
     HelpDescriptorsComponent,
-    BottomPanelComponent,
+    FooterPanelComponent,
     UiComponent,
     SceneComponent,
   ],

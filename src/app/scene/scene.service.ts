@@ -106,7 +106,6 @@ export class SceneService implements OnDestroy {
           this.controls.update();
         });
       }
-      // this.controls.update();
       window.addEventListener('resize', () => {
         this.resize();
       });

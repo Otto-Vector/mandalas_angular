@@ -3,11 +3,11 @@ import {SelectedValue, SelectService} from "../../shared/select.service";
 import {HistoryService} from "../../shared/history.service";
 
 @Component({
-  selector: 'app-bottom-panel',
-  templateUrl: './bottom-panel.component.html',
-  styleUrls: ['./bottom-panel.component.scss']
+  selector: 'app-footer-panel',
+  templateUrl: './footer-panel.component.html',
+  styleUrls: ['./footer-panel.component.scss']
 })
-export class BottomPanelComponent implements OnInit {
+export class FooterPanelComponent implements OnInit {
 
   constructor(
     private selected : SelectService,
