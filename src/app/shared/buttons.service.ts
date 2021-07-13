@@ -2,7 +2,7 @@
 import {Injectable} from "@angular/core";
 import {ColorService} from "./color.service";
 import {Subscription} from "rxjs";
-import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
+import {HistoryService, visibleColors} from "./history.service";
 
 export interface Buttons {
   id: string
@@ -165,16 +165,21 @@ export class ButtonsService {
   ]
 
   private subs: Subscription;
+  private readonly subs_for_color_visual : Subscription
 
   constructor(
-    private colorService : ColorService
-
+    private colorService : ColorService,
+    private history : HistoryService
   ) {
     //автоматический покрас при инициализации класса
     //     this.colored(colorService.getSchema)
         this.subs = this.colorService.schema$.subscribe((schema) => {
           this.colored(schema)
         })
+
+        this.subs_for_color_visual = this.history.visible_colors$.subscribe((visual) =>{
+          this.visualed_colors(visual)
+    })
   }
 
   //отписка от слушания переменной
@@ -216,6 +221,15 @@ export class ButtonsService {
       //окрашивание кнопок с цифрами
       if (/^num\d$/.test(id)) {
         this.buttons[i].color = shema[+content]
+      }
+    }
+  }
+
+  //активация кнопок
+  private visualed_colors(colors: visibleColors) {
+    for (let [i,{id,content}] of this.buttons.entries()) {
+      if (/^num\d$/.test(id)) {
+        this.buttons[i].unactive_visual_mode = !colors[+content]
       }
     }
   }

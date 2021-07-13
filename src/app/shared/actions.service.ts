@@ -23,16 +23,15 @@ export class ActionsService implements OnInit{
     console.log("default_action")
   }
 
-  buttonListener(local) {
+  buttonListener(local:Buttons) {
     //упрощаем обращение с массивом
     let buttons: Buttons[] = this.globalBtn.buttons
     let history = this.history.history_default
 
     //нажатие кнопок отображения помощи справа и слева
     if (['r_help', 'l_help'].includes(local.id)) {
-      local.sw_mode('unactive_visual_mode')
-      local.sw_mode(false)
 
+      local.sw_mode('unactive_visual_mode')
 
       for (let [i, {left}] of buttons.entries()) {
         if (left === local.left) {
@@ -51,8 +50,8 @@ export class ActionsService implements OnInit{
       }
     }
 
+    //смена цветовых схем
     if (local.id === 'colors_shema') {
-      //смена состояния кнопки
 
       if (history.gray_mode) {
         history.swich_mode('second_gray_mode')
@@ -76,17 +75,34 @@ export class ActionsService implements OnInit{
 
     }
 
-    //пересборка визуализации. пока вот такой костыль на этом уровне Angular
+    //меняем визуализацию
+    if (/^num\d$/.test(local.id)) {
+      // local.sw_mode('unactive_visual_mode')
+      this.history.visColorSet = +local.content
+    }
+
+    if (local.id === 'all_vis') {
+      this.history.visColorAll(true)
+    }
+    if (local.id === 'all_unvis') {
+      this.history.visColorAll(false)
+    }
+    if (local.id === 'sw_unvis') {
+      this.history.visColorAll(undefined)
+    }
+
+
+    //пересборка визуализации. пока вот такой костыль на этом уровне знания Angular :)
     function reView(){
       let face = {}
       for (const [i, {id}] of buttons.entries()) { face[id] = i }
-      // @ts-ignore
+
       buttons[face['colors_shema']].sw_mode('unactive_visual_mode',
         (!history.gray_mode && history.second_color_mode)
         ||
         ( history.gray_mode && history.second_gray_mode )
       )
-      // @ts-ignore
+
       buttons[face['gray_shema']].sw_mode('unactive_visual_mode', history.gray_mode)
     }
 

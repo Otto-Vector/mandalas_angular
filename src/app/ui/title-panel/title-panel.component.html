@@ -14,7 +14,9 @@
   <input type="text" id="title_input" #title_input
          [(ngModel)]="title"
          (ngModelChange)="fixValue(title)"
-         [maxLength]="max_input_length">
+         [maxLength]="max_input_length"
+         [placeholder]="title_placeholder"
+  >
   <button id="clear_button" (click)="clearTitle(); title_input.focus()" ></button>
 
 </header>

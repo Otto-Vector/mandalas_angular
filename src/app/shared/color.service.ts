@@ -3,10 +3,8 @@ import {BehaviorSubject} from "rxjs";
 
 
 type typeTenColors = [
-  string,
-  string,string,string,
-  string,string,string,
-  string,string,string
+  string,string,string,string,string,
+  string,string,string,string,string
 ]
 
 export interface BaseColor {

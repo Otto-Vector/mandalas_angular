@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 import {ElementRef, Injectable, NgZone, OnDestroy} from '@angular/core';
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
-import {UiComponent} from "../ui/ui.component";
+import {VisualConstructorsService} from "./visual-constructors.service";
+
 
 // import {root} from "rxjs/internal-compatibility";
 
@@ -10,7 +11,7 @@ export class SceneService implements OnDestroy {
   private canvas: HTMLCanvasElement;
   private renderer: THREE.WebGLRenderer;
   private camera: THREE.PerspectiveCamera;
-  private scene: THREE.Scene;
+  public scene: THREE.Scene;
   public controls: OrbitControls
   // private active_layer: HTMLElement = document.getElementById('ui-wrapper')
   // private active_layer: HTMLElement = window.document.body['app-root']['app-ui']
@@ -18,14 +19,13 @@ export class SceneService implements OnDestroy {
   private cube: THREE.Mesh;
 
   private frameId: number = null;
+  public visualize: any
 
   public constructor(
     private ngZone: NgZone,
-
+    // private visualConstructorsService : VisualConstructorsService
   ) {
-    // this.active_layer = ui.uiHTMLwrap
-    // console.log(this.active_layer)
-    // console.log(window.document)
+    // this.visualize = visualConstructorsService.add_mandala(this.scene)
   }
 
   public ngOnDestroy(): void {
@@ -43,6 +43,7 @@ export class SceneService implements OnDestroy {
       alpha: true,    // transparent background
       antialias: true // smooth edges
     });
+    this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 
     // create the scene
@@ -51,7 +52,8 @@ export class SceneService implements OnDestroy {
     this.camera = new THREE.PerspectiveCamera(
       75, window.innerWidth / window.innerHeight, 0.1, 1000
     );
-    this.camera.position.z = 5;
+    //дальность камеры
+    this.camera.position.z = 35;
     this.scene.add(this.camera);
 
     ////////////////////////////////////////////////////////////////////////////
@@ -74,8 +76,8 @@ export class SceneService implements OnDestroy {
     this.controls.dampingFactor = 0.05;
 
     //параметры дистанции
-    this.controls.minDistance = 1;
-    this.controls.maxDistance = 100;
+    this.controls.minDistance = 2;
+    this.controls.maxDistance = 444;
 
     //???это может быть интересно. возможно повлияет на автофокус
     this.controls.maxPolarAngle = Math.PI / 2;
@@ -85,11 +87,11 @@ export class SceneService implements OnDestroy {
     // this.light.position.z = 100;
     // this.scene.add(this.light);
 
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const randColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-    const material = new THREE.MeshBasicMaterial({color: randColor});
-    this.cube = new THREE.Mesh(geometry, material);
-    this.scene.add(this.cube);
+    // const geometry = new THREE.BoxGeometry(1, 1, 1);
+    // const randColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    // const material = new THREE.MeshBasicMaterial({color: randColor});
+    // this.cube = new THREE.Mesh(geometry, material);
+    // this.scene.add(this.cube);
 
   }
 
@@ -117,8 +119,8 @@ export class SceneService implements OnDestroy {
       this.render();
     });
 
-    this.cube.rotation.x += 0.01;
-    this.cube.rotation.y += 0.01;
+    // this.cube.rotation.x += 0.01;
+    // this.cube.rotation.y += 0.01;
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -131,4 +133,10 @@ export class SceneService implements OnDestroy {
 
     this.renderer.setSize(width, height);
   }
+
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+
 }

@@ -16,6 +16,7 @@ export class TitlePanelComponent implements OnInit {
   title : string = this.history.title_input.value
   number : string | number  = this.title.length
   max_input_length = this.valuesService.max_input_length
+  title_placeholder: string = 'Название мандалы'
 
   ngOnInit(): void {
 
