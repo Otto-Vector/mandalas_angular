@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {SelectService} from "./select.service";
 import {BehaviorSubject} from "rxjs";
+import {SupportUtilsService} from "../scene/support-utils.service";
 
 export type visibleColors = [
   boolean, boolean, boolean, boolean, boolean,
@@ -29,7 +30,8 @@ export interface History {
 export class HistoryService {
 
   constructor(
-    private selectedValue: SelectService
+    private readonly selectedValue: SelectService,
+    private readonly supportUtilsService : SupportUtilsService
   ) {
 
   }
@@ -50,12 +52,10 @@ export class HistoryService {
     second_color_mode: false,
     gray_mode: false,
     second_gray_mode: false,
-    swich_mode: function (mode) {
-      this[mode] = !this[mode];
-      return this[mode]
-    }
+    swich_mode: this.supportUtilsService.mode_sw
   }
 
+  //обзор и манипуляции с визуализацией цветов
   private vis_colors_sw = new BehaviorSubject<visibleColors>(this.history_default.visible_colors)
   public visible_colors$ = this.vis_colors_sw.asObservable()
 
@@ -70,7 +70,6 @@ export class HistoryService {
 
   //изменение видимости цветов (без параметров переключает видимые с невидимыми)
   public visColorAll(switcher: boolean | undefined) {
-
     for (let idx=0; idx < this.history_default.visible_colors.length; idx++) {
         this.history_default.visible_colors[idx] = switcher ?? !this.history_default.visible_colors[idx]
     }

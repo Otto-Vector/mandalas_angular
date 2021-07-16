@@ -54,20 +54,23 @@ export class ActionsService implements OnInit{
     if (local.id === 'colors_shema') {
 
       if (history.gray_mode) {
-        history.swich_mode('second_gray_mode')
-        this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
+        // history.swich_mode('second_gray_mode')
+        // this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
+
+        this.colorService.setSchema = !history.swich_mode('second_gray_mode') ? 'gray' : 'gray2'
       } else {
-        history.swich_mode('second_color_mode')
-        this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
+        // history.swich_mode('second_color_mode')
+        // this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
+
+        this.colorService.setSchema = !history.swich_mode('second_color_mode') ? 'main' : 'second'
       }
 
     }
 
+    //смена серых схем
     if (local.id === 'gray_shema') {
 
-      // @ts-ignore
-      history.swich_mode('gray_mode')
-      if (history.gray_mode) {
+      if (history.swich_mode('gray_mode')) {
         this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
       } else {
         this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
