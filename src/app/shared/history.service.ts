@@ -68,13 +68,12 @@ export class HistoryService {
     return this.vis_colors_sw.getValue()
   }
 
+  //изменение видимости цветов (без параметров переключает видимые с невидимыми)
   public visColorAll(switcher: boolean | undefined) {
 
-      for (let [idx,_] of this.history_default.visible_colors.entries()) {
-        this.history_default.visible_colors[idx] = (typeof switcher == 'undefined') ?
-          !this.history_default.visible_colors[idx] : switcher
+    for (let idx=0; idx < this.history_default.visible_colors.length; idx++) {
+        this.history_default.visible_colors[idx] = switcher ?? !this.history_default.visible_colors[idx]
     }
-
     this.vis_colors_sw.next(this.history_default.visible_colors)
   }
 }

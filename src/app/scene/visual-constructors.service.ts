@@ -26,9 +26,11 @@ export class VisualConstructorsService {
                private readonly algorithm : CalcMandalasAlgorithmService,
                private readonly history : HistoryService
   ) {
+    //подписка на изменения параметров цвета
     this.subs_for_color = colorService.schema$.subscribe((schema) => {
           this.color_material_set(schema)
         })
+    ////подписка на изменения параметров визуальности
     this.subs_for_color_visual = history.visible_colors$.subscribe((visibles) =>{
       for (let [colornum,bool] of visibles.entries()) {
         this.unvis(colornum,bool)
@@ -130,7 +132,7 @@ export class VisualConstructorsService {
   private plane : visualObject[]
 
   //скрытие/отображение объектов
-  unvis(colorn: number, bool_value: boolean) {
+  private unvis(colorn: number, bool_value: boolean) {
     if (this.axis) {
       for (let {colornum, mesh} of [...this.axis,...this.plane]) {
         if (colorn === colornum) {
