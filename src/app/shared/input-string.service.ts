@@ -6,17 +6,15 @@ import { Injectable } from '@angular/core';
 export class InputStringService {
   //символы расположены строго по таблице (удачно получилось то, что нужен всего один пробел)
   private readonly SYMBOLS_STATIC : string = "abcdefghijklmnopqrstuvwxyz абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
-  private readonly STRING_BY_DEFAULT : string = "0123456789"
+  // private readonly SYMBOLS_STATIC : string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+  private readonly STRING_BY_DEFAULT : string = "Умиротворённость"
 
   constructor(
   ) {  }
 
-
   ///функция перевода строки в числа
   //принимает строку, где каждая позиция символа соответсвует числовому коду
   public to_array_of_numbers(input_string : string) : number[] {
-
-    // input_string = this.modification_to_normal(input_string)
 
     return input_string
             .split('') //перевод строки в массив
@@ -27,7 +25,7 @@ export class InputStringService {
                 )
   }
 
-
+  //возвращает обработанную строку без пробелов в нижнем регистре либо обработанную тестовую строку
   modification_to_normal(string_from_user_input : string, string_by_default : string = this.STRING_BY_DEFAULT) : string {
   //принимает две строки, string_from_user_input - на обработку
   //string_by_default - на замену, если string_from_user_input оказалась false
@@ -42,9 +40,7 @@ export class InputStringService {
             :
               string_from_user_input
                 .replace(/[\s.,%]/g, '') //убираем все пробелы
-                .toLowerCase()     //убираем верхний регистр
-}//возвращает обработанную строку без пробелов в нижнем регистре либо обработанную тестовую строку
-
-
+                .toLowerCase()     //убираем регистр
+  }
 
 }

@@ -17,6 +17,7 @@ import { FooterPanelComponent } from './ui/footer-panel/footer-panel.component';
 
 import { SceneComponent } from './scene/scene.component';
 import { UiComponent } from './ui/ui.component';
+import { SpecialCharacterDirective } from './directives/special-character.directive';
 
 
 
@@ -32,6 +33,7 @@ import { UiComponent } from './ui/ui.component';
     FooterPanelComponent,
     UiComponent,
     SceneComponent,
+    SpecialCharacterDirective,
   ],
   imports: [
     BrowserModule,

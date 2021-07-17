@@ -16,7 +16,9 @@
 </div>
 
   <input type="text" id="title_input" #title_input
+         specialIsAlphaNumeric
          [(ngModel)]="title"
+         (ngModelChange) = "number = title.length"
          [maxLength]="max_input_length"
          [placeholder]="title_placeholder"
   >

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {SelectService} from "./select.service";
 import {BehaviorSubject} from "rxjs";
 import {SupportUtilsService} from "./support-utils.service";
+import {InputStringService} from "./input-string.service";
 
 export type visibleColors = [
   boolean, boolean, boolean, boolean, boolean,
@@ -31,7 +32,8 @@ export class HistoryService {
 
   constructor(
     private readonly selectedValue: SelectService,
-    private readonly supportUtilsService : SupportUtilsService
+    private readonly supportUtilsService : SupportUtilsService,
+    private readonly stringSrv : InputStringService
   ) {
 
   }
@@ -80,7 +82,7 @@ export class HistoryService {
   public title_input$ = this.title_input.asObservable()
 
   get getTitle() : string {
-    return this.title_input.getValue().toLowerCase()
+    return this.stringSrv.modification_to_normal(this.title_input.getValue())
   }
 
   set setTitle(val:string) {
