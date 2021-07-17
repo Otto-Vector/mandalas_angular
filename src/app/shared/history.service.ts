@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {SelectService} from "./select.service";
 import {BehaviorSubject} from "rxjs";
-import {SupportUtilsService} from "../scene/support-utils.service";
+import {SupportUtilsService} from "./support-utils.service";
 
 export type visibleColors = [
   boolean, boolean, boolean, boolean, boolean,
@@ -36,12 +36,11 @@ export class HistoryService {
 
   }
 
-  title_input: any = {value: "mandala"}
 
   public history_default: History = {
     selected_mandala: this.selectedValue.selected_mandala[0].value,
-    title_of_mandala: this.title_input.value,
-    length_of_title: this.title_input.value.length,
+    title_of_mandala: 'MandalaZ',
+    length_of_title: 99,
     dots_mode: false,
     grid_mode: false,
     grid_mode_for_dots: false,
@@ -59,12 +58,12 @@ export class HistoryService {
   private vis_colors_sw = new BehaviorSubject<visibleColors>(this.history_default.visible_colors)
   public visible_colors$ = this.vis_colors_sw.asObservable()
 
-  set visColorSet(numcolor: number) {
+  set setVisColor(numcolor: number) {
     this.history_default.visible_colors[numcolor] = !this.history_default.visible_colors[numcolor]
     this.vis_colors_sw.next(this.history_default.visible_colors)
   }
 
-  get visColorGet(): visibleColors {
+  get getVisColor(): visibleColors {
     return this.vis_colors_sw.getValue()
   }
 
@@ -74,5 +73,19 @@ export class HistoryService {
         this.history_default.visible_colors[idx] = switcher ?? !this.history_default.visible_colors[idx]
     }
     this.vis_colors_sw.next(this.history_default.visible_colors)
+  }
+
+  //обзор и манипуляции с введенным title
+  private title_input = new BehaviorSubject<string>(this.history_default.title_of_mandala)
+  public title_input$ = this.title_input.asObservable()
+
+  get getTitle() : string {
+    return this.title_input.getValue().toLowerCase()
+  }
+
+  set setTitle(val:string) {
+    // val = val.toLowerCase()
+    this.title_input.next(val)
+    this.history_default.title_of_mandala = val
   }
 }

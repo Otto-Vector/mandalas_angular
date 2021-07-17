@@ -2,12 +2,12 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 
 
-type typeTenColors = [
+export type typeTenColors = [
   string,string,string,string,string,
   string,string,string,string,string
 ]
 
-export interface BaseColor {
+export interface BaseColor{
   main   : typeTenColors
   second : typeTenColors
   gray   : typeTenColors

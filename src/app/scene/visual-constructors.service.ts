@@ -7,6 +7,7 @@ import {BoxGeometry, Material, Mesh, Scene, SphereGeometry} from "three";
 
 import {CalcMandalasAlgorithmService} from "./calc-mandalas-algorithm.service";
 import {HistoryService} from "../shared/history.service";
+import {InputStringService} from "../shared/input-string.service";
 
 //визуальный объект с вынесеным числом цвета для обработки
 type visualObject = {
@@ -24,7 +25,8 @@ export class VisualConstructorsService {
 
   constructor( private readonly colorService : ColorService,
                private readonly algorithm : CalcMandalasAlgorithmService,
-               private readonly history : HistoryService
+               private readonly history : HistoryService,
+               private readonly inputStringSrv : InputStringService
   ) {
     //подписка на изменения параметров цвета
     this.subs_for_color = colorService.schema$.subscribe((schema) => {
@@ -144,7 +146,9 @@ export class VisualConstructorsService {
   /*////////////////////////////////////////////////////////////////////////////////////////////////*/
   //добавляет объекты на сцену
   public add_mandala(scene : Scene) {
-    let numsArray : number[] = [0,1,2,3,4,5]
+    // let numsArray : number[] = [0,1,2,3,4,5]
+    let numsArray : number[] = this.inputStringSrv.to_array_of_numbers(this.history.getTitle)
+    numsArray.unshift(numsArray.reduce((a,b) => (a+b)%9 || 9 ))
     this.axis  = this.axis_visual(numsArray)
     this.plane = this.plain_x_cube_visual(
       this.algorithm.plane_square_3x_algorithm(numsArray)
@@ -152,9 +156,24 @@ export class VisualConstructorsService {
 
     for (let {colornum, mesh} of [...this.axis,...this.plane]) {
       scene.add(mesh)
-      // if ([1,2,5].includes(colornum)) {
-      //   mesh.visible = false
-      // }
+
     }
   }
+  public clear_scene(scene : Scene) {
+    if (this.axis) {
+      for (let {mesh} of this.axis) {
+        scene.remove(mesh)
+      }
+      this.axis = null
+    }
+    if (this.plane) {
+      for (let {mesh} of this.plane) {
+        scene.remove(mesh)
+      }
+      this.plane = null }
+
+    }
+
+  //////////////////////////////////////////////////////////////////////////////
+
 }

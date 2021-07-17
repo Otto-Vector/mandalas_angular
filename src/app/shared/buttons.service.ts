@@ -1,9 +1,9 @@
 
 import {Injectable, OnDestroy} from "@angular/core";
-import {ColorService} from "./color.service";
+import {ColorService, typeTenColors} from "./color.service";
 import {Subscription} from "rxjs";
 import {HistoryService, visibleColors} from "./history.service";
-import {SupportUtilsService} from "../scene/support-utils.service";
+import {SupportUtilsService} from "./support-utils.service";
 
 export interface Buttons {
   id: string
@@ -168,7 +168,6 @@ export class ButtonsService implements OnDestroy{
   private readonly subs: Subscription;
   private readonly subs_for_color_visual : Subscription
 
-
   constructor(
     private readonly colorService : ColorService,
     private readonly history : HistoryService,
@@ -194,7 +193,7 @@ export class ButtonsService implements OnDestroy{
 
 
   //окрашивание кнопок
-  private colored(shema : string[]) : void {
+  private colored(shema : typeTenColors) : void {
 
     for (let [i,{id,content}] of this.buttons.entries()) {
 

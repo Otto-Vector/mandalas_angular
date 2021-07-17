@@ -81,7 +81,7 @@ export class ActionsService implements OnInit{
     //меняем визуализацию
     if (/^num\d$/.test(local.id)) {
       // local.sw_mode('unactive_visual_mode')
-      this.history.visColorSet = +local.content
+      this.history.setVisColor = +local.content
     }
 
     if (local.id === 'all_vis') {

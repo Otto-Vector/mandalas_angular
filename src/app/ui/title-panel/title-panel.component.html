@@ -1,6 +1,10 @@
-<header class="title">
+<header class="title"
+        (keydown.enter)="setValue(title)"
+        (keydown.arrowUp)="number_of_symbols_changer_from_current('up')"
+        (keydown.arrowDown)="number_of_symbols_changer_from_current('down')"
+>
 
-  <div id="number_of_symbols_box">
+  <div id="number_of_symbols_box" >
   <input type="text" id="number_of_symbols" #number_of_symbols
          [(ngModel)] ="number"
          inputmode="numeric"
@@ -13,10 +17,10 @@
 
   <input type="text" id="title_input" #title_input
          [(ngModel)]="title"
-         (ngModelChange)="fixValue(title)"
          [maxLength]="max_input_length"
          [placeholder]="title_placeholder"
   >
+<!--         (ngModelChange)="fixValue(title)"-->
   <button id="clear_button" (click)="clearTitle(); title_input.focus()" ></button>
 
 </header>
