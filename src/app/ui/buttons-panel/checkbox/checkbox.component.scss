@@ -39,6 +39,7 @@
 
   &__input:focus + &__box {
     border-color: $dark-50;
+    box-shadow: black 0 1px 2px;
   }
 
   &__input:disabled + &__box {

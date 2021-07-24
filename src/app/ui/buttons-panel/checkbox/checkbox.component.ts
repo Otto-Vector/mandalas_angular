@@ -12,7 +12,6 @@ export class CheckboxComponent implements OnInit {
 
     @Input() button_check: Buttons
 
-        title_for_check:string = 'empty'
         block_name   = 'checkbox'
         default_type = 'checkbox'
         main_class   = this.block_name

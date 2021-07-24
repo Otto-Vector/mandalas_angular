@@ -3,7 +3,9 @@
     <input [type]="default_type"
            [class] = "input_class"
            [name]  = "block_name"
-           [checked]="checked_mode">
+           [checked]="button_check.unactive_visual_mode"
+           [disabled]="button_check.disabled"
+    >
     <span [class]= "box_class" ></span>
   </label>
   <app-help-descriptors [localButton]="button_check"></app-help-descriptors>
