@@ -10,12 +10,11 @@ import {ActionsService} from "../../../shared/actions.service";
 
 export class PalitraButtonComponent implements OnInit {
 
+
 @Input() localButton : Buttons
   class_name: string = 'palitra_button'
-  opacity_button: string = 'opacity_button'
-  unactive_visual_button: string = 'unactive_visual_button'
+  unactive_visual_mode: string = 'unactive_visual_mode'
   action
-
 
   constructor( private readonly actionsService : ActionsService) {
       this.action  = actionsService

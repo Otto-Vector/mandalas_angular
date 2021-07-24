@@ -2,6 +2,8 @@
 @import "../../../../styles/variables";
 
 .palitra_button {
+    all: unset;
+    display: block;
 
     @include size(20px);
 
@@ -26,15 +28,19 @@
     opacity: 1;
     transition: 0.3s;
 
-    //&:hover {
-    //  color: rgb(77, 102, 126);
-    //}
+    &:active {
+      color: green;
+    }
 
-    &.opacity_button {
+    &:disabled {
       opacity: .5;
     }
 
-    &.unactive_visual_button {
+    //&.opacity_button {
+    //  opacity: .5;
+    //}
+
+    &.unactive_visual_mode {
       border-color: transparent;
       border-radius: 50%;
       box-shadow: 0 0 4px;

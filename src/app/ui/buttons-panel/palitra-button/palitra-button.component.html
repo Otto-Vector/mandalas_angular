@@ -1,13 +1,14 @@
-<div
+<button
      *ngIf="localButton.content !== 'visual_check'; else checkbox"
      [title]="localButton.title"
      [id]="localButton.id"
+     [disabled] = "localButton.disabled"
+
      [ngStyle]="{'background-color' : localButton.color}"
 
      [ngClass]="[
       class_name,
-      localButton.opacity_mode ? opacity_button : '',
-      localButton.unactive_visual_mode ? unactive_visual_button : ''
+      localButton.unactive_visual_mode ? unactive_visual_mode : ''
      ]"
 
     (click)="action.buttonListener(localButton)"
@@ -16,7 +17,7 @@
 
   <app-help-descriptors [localButton]="localButton"></app-help-descriptors>
 
-</div>
+</button>
 
 <ng-template #checkbox>
   <app-checkbox [button_check]="localButton"> </app-checkbox>
