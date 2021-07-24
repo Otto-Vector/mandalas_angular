@@ -29,16 +29,21 @@
     transition: 0.3s;
 
     &:active {
-      color: green;
+      transform: translateY(2px);
+    }
+
+    &:focus {
+      box-shadow: 0 2px 2px;
+    }
+
+    &:focus:active {
+      box-shadow: none;
     }
 
     &:disabled {
       opacity: .5;
     }
 
-    //&.opacity_button {
-    //  opacity: .5;
-    //}
 
     &.unactive_visual_mode {
       border-color: transparent;
