@@ -1,26 +1,26 @@
 
-import {Injectable, OnDestroy} from "@angular/core";
-import {ColorService, typeTenColors} from "./color.service";
-import {Subscription} from "rxjs";
-import {HistoryService, visibleColors} from "./history.service";
-import {SupportUtilsService} from "./support-utils.service";
+import {Injectable, OnDestroy} from '@angular/core';
+import {ColorService, typeTenColors} from './color.service';
+import {Subscription} from 'rxjs';
+import {HistoryService, visibleColors} from './history.service';
+import {SupportUtilsService} from './support-utils.service';
 
 export interface Buttons {
-  id: string
-  color: string
-  title: string
-  content: string
-  left: boolean
-  disabled: boolean
-  unactive_visual_mode: boolean
-  help: boolean,
-  sw_mode: (string, boolean?) => boolean
+  id: string;
+  color: string;
+  title: string;
+  content: string;
+  left: boolean;
+  disabled: boolean;
+  unactive_visual_mode: boolean;
+  help: boolean;
+  sw_mode: (string, boolean?) => boolean;
 }
 
-@Injectable({providedIn: "root"})
+@Injectable({providedIn: 'root'})
 export class ButtonsService implements OnDestroy{
 
-  color_of: string = '#e9e9e9'
+  color_of = '#e9e9e9';
 
   buttons: Buttons[] = [
     {
@@ -163,51 +163,51 @@ export class ButtonsService implements OnDestroy{
       id: 'l_help', title: 'Убрать помощь слева', content: '?',
       sw_mode : this.supportUtilsService.mode_sw
     },
-  ]
+  ];
 
   private readonly subs: Subscription;
-  private readonly subs_for_color_visual : Subscription
+  private readonly subs_for_color_visual: Subscription;
 
   constructor(
-    private readonly colorService : ColorService,
-    private readonly history : HistoryService,
-    private readonly supportUtilsService : SupportUtilsService
+    private readonly colorService: ColorService,
+    private readonly history: HistoryService,
+    private readonly supportUtilsService: SupportUtilsService
   ) {
-    //автоматический покрас при инициализации класса
+    // автоматический покрас при инициализации класса
     this.subs = this.colorService.schema$.subscribe((schema) => {
-      this.colored(schema)
-    })
-    //автоматическое присвоение значения на визуализацию
-    this.subs_for_color_visual = this.history.visible_colors$.subscribe((visual) =>{
-      this.visualed_colors(visual)
-    })
+      this.colored(schema);
+    });
+    // автоматическое присвоение значения на визуализацию
+    this.subs_for_color_visual = this.history.visible_colors$.subscribe((visual) => {
+      this.visualed_colors(visual);
+    });
   }
 
-  //отписка от слушания переменной
+  // отписка от слушания переменной
   ngOnDestroy(): void {
-    this.subs.unsubscribe()
-    this.subs_for_color_visual.unsubscribe()
+    this.subs.unsubscribe();
+    this.subs_for_color_visual.unsubscribe();
   }
 
 
 
-  //окрашивание кнопок
-  private colored(shema : typeTenColors) : void {
+  // окрашивание кнопок
+  private colored(shema: typeTenColors): void {
 
-    for (let [i,{id,content}] of this.buttons.entries()) {
+    for (const [i, {id, content}] of this.buttons.entries()) {
 
-      //окрашивание кнопок с цифрами
+      // окрашивание кнопок с цифрами
       if (/^num\d$/.test(id)) {
-        this.buttons[i].color = shema[+content]
+        this.buttons[i].color = shema[+content];
       }
     }
   }
 
-  //активация кнопок
+  // активация кнопок
   private visualed_colors(colors: visibleColors) {
-    for (let [i,{id,content}] of this.buttons.entries()) {
+    for (const [i, {id, content}] of this.buttons.entries()) {
       if (/^num\d$/.test(id)) {
-        this.buttons[i].unactive_visual_mode = !colors[+content]
+        this.buttons[i].unactive_visual_mode = !colors[+content];
       }
     }
   }
