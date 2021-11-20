@@ -1,8 +1,9 @@
 
-import {Injectable, OnInit} from '@angular/core';
-import {Buttons, ButtonsService} from './buttons.service';
+import {Injectable} from '@angular/core';
+import {ButtonBooleanKeys, ButtonsInterface, ButtonsService} from './buttons.service';
 import {ColorService} from './color.service';
 import {HistoryService} from './history.service';
+import {SupportUtilsService} from './support-utils.service';
 
 
 @Injectable({providedIn: 'root'})
@@ -10,7 +11,8 @@ export class ActionsService {
 
   constructor(private readonly globalBtn: ButtonsService,
               private readonly colorService: ColorService,
-              private readonly history: HistoryService
+              private readonly history: HistoryService,
+              private readonly support: SupportUtilsService
   ) {
     // покрас кнопок при инициализации
     // this.colorService.setSchema('main')
@@ -23,19 +25,21 @@ export class ActionsService {
     console.log('default_action');
   }
 
-  buttonListener(local: Buttons) {
+  buttonListener(local: ButtonsInterface) {
     // упрощаем обращение с массивом
-    const buttons: Buttons[] = this.globalBtn.buttons;
+    const buttons: ButtonsInterface[] = this.globalBtn.buttons;
     const history = this.history.historyDefault;
+    const btnBooleanKeys: ButtonBooleanKeys<string> = this.globalBtn.booleanKeys;
+    // const historyBooleanKeys = this.support.booleanKeysFilter(history);
 
     // нажатие кнопок отображения помощи справа и слева
     if (['r_help', 'l_help'].includes(local.id)) {
 
       local.modeSwitcher('inactiveVisualMode');
 
-      for (const [i, {isLeft}] of buttons.entries()) {
-        if (isLeft === local.isLeft) {
-          buttons[i].modeSwitcher('help');
+      for (const [i, {mode}] of buttons.entries()) {
+        if (mode.isLeft === local.mode.isLeft) {
+          buttons[i].mode.help = false;
         }
       }
 
@@ -46,7 +50,7 @@ export class ActionsService {
       // смена состояния кнопки
       local.modeSwitcher('inactiveVisualMode');
       for (const i of buttons.keys()) {
-        buttons[i].modeSwitcher('isLeft');
+        buttons[i].modeSwitcher(btnBooleanKeys.isLeft);
       }
     }
 

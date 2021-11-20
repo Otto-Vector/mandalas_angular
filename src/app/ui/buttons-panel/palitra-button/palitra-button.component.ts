@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Buttons} from "../../../shared/buttons.service";
+import {ButtonsInterface} from "../../../shared/buttons.service";
 import {ActionsService} from "../../../shared/actions.service";
 
 @Component({
@@ -11,7 +11,7 @@ import {ActionsService} from "../../../shared/actions.service";
 export class PalitraButtonComponent implements OnInit {
 
 
-@Input() localButton : Buttons
+@Input() localButton : ButtonsInterface
   class_name: string = 'palitra_button'
   unactive_visual_mode: string = 'unactive_visual_mode'
   action

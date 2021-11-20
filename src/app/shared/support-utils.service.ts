@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {ButtonBooleanKeys} from './buttons.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,23 +18,30 @@ export class SupportUtilsService {
       return Math.abs(numberInFn - 11) > 9 ? this.toOneElevenDigit(numberInFn) : numberInFn;
   }
 
+  // выдаёт объект с булевыми ключами
+  public booleanKeysFilter(objWithBooleanKeys: object): object {
+     return Object.keys(objWithBooleanKeys)
+       .filter(key => typeof this[key] === 'boolean')
+       .reduce((value, key) => ({...value, [key]: key}), {});
+  }
+
   // переключает логические поля внутри активного элемента по ключу
   // второй параметр устанавливает ключ в значение себя
-  public modeSwitcher(mode: string, bool?: boolean ): boolean | undefined {
+  public modeSwitcher(key: string, bool?: boolean ): boolean | undefined {
     // создание массива ключей с логическим содержимым
-    const booleanKeys: string[] = Object.keys(this).filter(key => typeof this[key] === 'boolean');
+    const booleanKeys: {} = this.booleanKeysFilter(this);
 
     try {
       // проверка правильности написания ключа переключения
-      if (booleanKeys.includes(mode)) {
+      if (booleanKeys.hasOwnProperty(key)) {
 
         // проверка на применение второго параметра bool
-        (typeof bool === 'undefined') ? this[mode] = !this[mode] : this[mode] = bool;
+        (typeof bool === 'undefined') ? this[key] = !this[key] : this[key] = bool;
 
         // возвращает переключенное значение
-        return this[mode];
+        return this[key];
       } else {
-        throw new SyntaxError('Данные лог.переключателя некорректры. Должны быть: ' + booleanKeys.join(' '));
+        throw new SyntaxError('Данные лог.переключателя некорректры. Должны быть: ' + Object.keys(booleanKeys).join(' '));
       }
     } catch (e) {
       // выводит ошибку об отсутствии ключей и возвращает неопределённость

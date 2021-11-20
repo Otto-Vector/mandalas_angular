@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Buttons} from "../../../shared/buttons.service";
+import {ButtonsInterface} from "../../../shared/buttons.service";
 
 
 @Component({
@@ -10,7 +10,7 @@ import {Buttons} from "../../../shared/buttons.service";
 
 export class CheckboxComponent implements OnInit {
 
-    @Input() button_check: Buttons
+    @Input() button_check: ButtonsInterface
 
         block_name   = 'checkbox'
         default_type = 'checkbox'
