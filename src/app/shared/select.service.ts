@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 
 
 export interface SelectedValue {
-  value: string
-  id: string
-  content: string
+  value: string;
+  id: string;
+  content: string;
 }
 
 @Injectable({
@@ -14,7 +14,7 @@ export class SelectService {
 
   constructor() { }
 
-selected_mandala : SelectedValue[] = [
+selectedMandala: SelectedValue[] = [
    {
       value: 'square3',
       id: '4',
@@ -55,5 +55,5 @@ selected_mandala : SelectedValue[] = [
       id: '7',
       content: 'квадрат шахматный расчёт (2вар) =11='
    }
-  ]
+  ];
 }

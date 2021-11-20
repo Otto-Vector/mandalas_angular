@@ -10,158 +10,158 @@ export interface Buttons {
   color: string;
   title: string;
   content: string;
-  left: boolean;
+  isLeft: boolean;
   disabled: boolean;
-  unactive_visual_mode: boolean;
+  inactiveVisualMode: boolean;
   help: boolean;
-  sw_mode: (string, boolean?) => boolean;
+  modeSwitcher: (key: string, defaultTo?: boolean) => boolean;
 }
 
 @Injectable({providedIn: 'root'})
 export class ButtonsService implements OnDestroy{
 
-  color_of = '#e9e9e9';
+  mainColorOfButtons = '#e9e9e9';
 
   buttons: Buttons[] = [
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'stat', title: 'Статистика', content: 'S',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num0', title: '0', content: '0',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num1', title: '1', content: '1',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num2', title: '2', content: '2',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num3', title: '3', content: '3',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num4', title: '4', content: '4',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num5', title: '5', content: '5',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num6', title: '6', content: '6',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num7', title: '7', content: '7',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num8', title: '8', content: '8',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'num9', title: '9', content: '9',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'colors_shema', title: 'Цветовые схемы', content: 'C',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'gray_shema', title: 'Серая схема', content: 'G',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : true, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : true, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'r_help', title: 'Убрать помощь справа', content: '?',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'greed_onoff', title: 'Убрать сетку', content: '#',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'all_unvis', title: 'Убрать все цвета', content: 'X',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'sw_unvis', title: 'Поменять активные с невидимыми', content: '@',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'all_vis', title: 'Вернуть все цвета', content: 'A',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'brd_color', title: 'Поменять цвет обводки', content: 'B',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'lbrd_unvis_onoff', title: 'Убрать/отобразить обводку', content: 'b',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'nums_unvis_onoff', title: 'Убрать/отобразить цифры', content: '№',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'dots_mode_onoff', title: 'Точечный режим', content: '\u2219',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'zoom_in', title: 'Приблизить', content: '+',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'zoom_out', title: 'Отдалить', content: '-',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'full_screen', title: 'Развернуть на весь экран', content: '\u25A3',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'save_settings', title: 'Сохранить настройки отображения', content: 'visual_check',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'sw_panels', title: 'Поменять панели кнопок местами', content: '\u21C4',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
     {
-      help: false, left : false, color: this.color_of, unactive_visual_mode: false, disabled: false,
+      help: false, isLeft : false, color: this.mainColorOfButtons, inactiveVisualMode: false, disabled: false,
       id: 'l_help', title: 'Убрать помощь слева', content: '?',
-      sw_mode : this.supportUtilsService.mode_sw
+      modeSwitcher : this.supportUtilsService.modeSwitcher
     },
   ];
 
@@ -178,7 +178,7 @@ export class ButtonsService implements OnDestroy{
       this.colored(schema);
     });
     // автоматическое присвоение значения на визуализацию
-    this.subs_for_color_visual = this.history.visible_colors$.subscribe((visual) => {
+    this.subs_for_color_visual = this.history.visibleColors$.subscribe((visual) => {
       this.visualed_colors(visual);
     });
   }
@@ -207,7 +207,7 @@ export class ButtonsService implements OnDestroy{
   private visualed_colors(colors: visibleColors) {
     for (const [i, {id, content}] of this.buttons.entries()) {
       if (/^num\d$/.test(id)) {
-        this.buttons[i].unactive_visual_mode = !colors[+content];
+        this.buttons[i].inactiveVisualMode = !colors[+content];
       }
     }
   }

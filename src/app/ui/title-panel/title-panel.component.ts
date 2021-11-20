@@ -27,7 +27,7 @@ export class TitlePanelComponent implements OnInit {
   }
 
   setValue(title) {
-    this.title = this.stringService.modification_to_normal(title)
+    this.title = this.stringService.modificationToNormal(title)
     this.history.setTitle = this.title
     this.number = this.number || this.title.length
   }

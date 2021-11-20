@@ -25,7 +25,7 @@ export class SceneComponent implements OnInit, OnDestroy {
     this.engServ.createScene(this.rendererCanvas)
     this.engServ.animate()
 
-    this.subsTitle = this.history.title_input$.subscribe((_) => {
+    this.subsTitle = this.history.titleInput$.subscribe((_) => {
       this.visualAdd.clear_scene(this.engServ.scene)
       this.visualAdd.add_mandala(this.engServ.scene)
       }

@@ -1,115 +1,115 @@
 
-import {Injectable, OnInit} from "@angular/core";
-import {Buttons, ButtonsService} from "./buttons.service";
-import {ColorService} from "./color.service";
-import {HistoryService} from "./history.service";
+import {Injectable, OnInit} from '@angular/core';
+import {Buttons, ButtonsService} from './buttons.service';
+import {ColorService} from './color.service';
+import {HistoryService} from './history.service';
 
 
-@Injectable({providedIn: "root"})
-export class ActionsService implements OnInit{
+@Injectable({providedIn: 'root'})
+export class ActionsService {
 
   constructor(private readonly globalBtn: ButtonsService,
-              private readonly colorService : ColorService,
+              private readonly colorService: ColorService,
               private readonly history: HistoryService
   ) {
-    //покрас кнопок при инициализации
+    // покрас кнопок при инициализации
     // this.colorService.setSchema('main')
   }
-  ngOnInit(): void {
-
-  }
+  // ngOnInit(): void {
+  //
+  // }
 
   default() {
-    console.log("default_action")
+    console.log('default_action');
   }
 
-  buttonListener(local:Buttons) {
-    //упрощаем обращение с массивом
-    let buttons: Buttons[] = this.globalBtn.buttons
-    let history = this.history.history_default
+  buttonListener(local: Buttons) {
+    // упрощаем обращение с массивом
+    const buttons: Buttons[] = this.globalBtn.buttons;
+    const history = this.history.historyDefault;
 
-    //нажатие кнопок отображения помощи справа и слева
+    // нажатие кнопок отображения помощи справа и слева
     if (['r_help', 'l_help'].includes(local.id)) {
 
-      local.sw_mode('unactive_visual_mode')
+      local.modeSwitcher('inactiveVisualMode');
 
-      for (let [i, {left}] of buttons.entries()) {
-        if (left === local.left) {
-          buttons[i].sw_mode('help')
+      for (const [i, {isLeft}] of buttons.entries()) {
+        if (isLeft === local.isLeft) {
+          buttons[i].modeSwitcher('help');
         }
       }
 
     }
 
-    //смена сторон панелей
+    // смена сторон панелей
     if (local.id === 'sw_panels') {
-      //смена состояния кнопки
-      local.sw_mode('unactive_visual_mode')
-      for (let i = 0; i < buttons.length; i++) {
-        buttons[i].sw_mode('left')
+      // смена состояния кнопки
+      local.modeSwitcher('inactiveVisualMode');
+      for (const i of buttons.keys()) {
+        buttons[i].modeSwitcher('isLeft');
       }
     }
 
-    //смена цветовых схем
+    // смена цветовых схем
     if (local.id === 'colors_shema') {
 
-      if (history.gray_mode) {
+      if (history.grayMode) {
         // history.swich_mode('second_gray_mode')
         // this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
 
-        this.colorService.setSchema = !history.swich_mode('second_gray_mode') ? 'gray' : 'gray2'
+        this.colorService.setSchema = !history.switchMode('second_gray_mode') ? 'gray' : 'gray2';
       } else {
         // history.swich_mode('second_color_mode')
         // this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
 
-        this.colorService.setSchema = !history.swich_mode('second_color_mode') ? 'main' : 'second'
+        this.colorService.setSchema = !history.switchMode('second_color_mode') ? 'main' : 'second';
       }
 
     }
 
-    //смена серых схем
+    // смена серых схем
     if (local.id === 'gray_shema') {
 
-      if (history.swich_mode('gray_mode')) {
-        this.colorService.setSchema = !history.second_gray_mode ? 'gray' : 'gray2'
+      if (history.switchMode('gray_mode')) {
+        this.colorService.setSchema = !history.secondGrayMode ? 'gray' : 'gray2';
       } else {
-        this.colorService.setSchema = !history.second_color_mode ? 'main' : 'second'
+        this.colorService.setSchema = !history.secondColorMode ? 'main' : 'second';
       }
 
     }
 
-    //меняем визуализацию
+    // меняем визуализацию
     if (/^num\d$/.test(local.id)) {
-      // local.sw_mode('unactive_visual_mode')
-      this.history.setVisColor = +local.content
+      // local.sw_mode('inactiveVisualMode')
+      this.history.setVisibleColorSwitchByNumber = +local.content;
     }
 
     if (local.id === 'all_vis') {
-      this.history.visColorAll(true)
+      this.history.visColorAll(true);
     }
     if (local.id === 'all_unvis') {
-      this.history.visColorAll(false)
+      this.history.visColorAll(false);
     }
     if (local.id === 'sw_unvis') {
-      this.history.visColorAll(undefined)
+      this.history.visColorAll(undefined);
     }
 
 
-    //пересборка визуализации. пока вот такой костыль на этом уровне знания Angular :)
+    // пересборка визуализации. пока вот такой костыль на этом уровне знания Angular :)
     function reView(){
-      let face = {}
-      for (const [i, {id}] of buttons.entries()) { face[id] = i }
+      const face = {};
+      for (const [i, {id}] of buttons.entries()) { face[id] = i; }
 
-      buttons[face['colors_shema']].sw_mode('unactive_visual_mode',
-        (!history.gray_mode && history.second_color_mode)
+      buttons[face.colors_shema].sw_mode('inactiveVisualMode',
+        (!history.grayMode && history.secondColorMode)
         ||
-        ( history.gray_mode && history.second_gray_mode )
-      )
+        ( history.grayMode && history.secondGrayMode )
+      );
 
-      buttons[face['gray_shema']].sw_mode('unactive_visual_mode', history.gray_mode)
+      buttons[face.gray_shema].sw_mode('inactiveVisualMode', history.grayMode);
     }
 
-    reView()
+    reView();
   }
 
 

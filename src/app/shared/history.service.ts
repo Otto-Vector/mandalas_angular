@@ -10,20 +10,20 @@ export type visibleColors = [
 ];
 
 export interface History {
-  selected_mandala: string;
-  title_of_mandala: string;
-  length_of_title: number;
-  dots_mode: boolean;
-  grid_mode: boolean;
-  grid_mode_for_dots: boolean;
-  border_mode: boolean;
-  border_color: number;
-  number_mode: boolean;
-  visible_colors: visibleColors;
-  second_color_mode: boolean;
-  gray_mode: boolean;
-  second_gray_mode: boolean;
-  swich_mode: (field: string) => boolean;
+  selectedMandala: string;
+  titleOfMandala: string;
+  lengthOfTitle: number;
+  dotsMode: boolean;
+  gridMode: boolean;
+  gridModeForDots: boolean;
+  borderMode: boolean;
+  borderColor: number;
+  numberMode: boolean;
+  visibleColors: visibleColors;
+  secondColorMode: boolean;
+  grayMode: boolean;
+  secondGrayMode: boolean;
+  switchMode: (key: string, defaultTo?: boolean) => boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -38,56 +38,56 @@ export class HistoryService {
 
   }
 
-  set setVisColor(numColor: number) {
-    this.history_default.visible_colors[numColor] = !this.history_default.visible_colors[numColor];
-    this.vis_colors_sw.next(this.history_default.visible_colors);
+  set setVisibleColorSwitchByNumber(numColor: number) {
+    this.historyDefault.visibleColors[numColor] = !this.historyDefault.visibleColors[numColor];
+    this.visibleColorsBehaviorSubject.next(this.historyDefault.visibleColors);
   }
 
   get getVisColor(): visibleColors {
-    return this.vis_colors_sw.getValue();
+    return this.visibleColorsBehaviorSubject.getValue();
   }
 
   get getTitle(): string {
-    return this.stringSrv.modification_to_normal(this.title_input.getValue());
+    return this.stringSrv.modificationToNormal(this.titleBehaviorSubject.getValue());
   }
 
   set setTitle(val: string) {
     // val = val.toLowerCase()
-    this.title_input.next(val);
-    this.history_default.title_of_mandala = val;
+    this.historyDefault.titleOfMandala = val;
+    this.titleBehaviorSubject.next(val);
   }
 
 
-  public history_default: History = {
-    selected_mandala: this.selectedValue.selected_mandala[0].value,
-    title_of_mandala: 'MandalaZ',
-    length_of_title: 99,
-    dots_mode: false,
-    grid_mode: false,
-    grid_mode_for_dots: false,
-    border_mode: true,
-    border_color: -1,
-    number_mode: false,
-    visible_colors: [true, true, true, true, true, true, true, true, true, true],
-    second_color_mode: false,
-    gray_mode: false,
-    second_gray_mode: false,
-    swich_mode: this.supportUtilsService.mode_sw
+  public historyDefault: History = {
+    selectedMandala: this.selectedValue.selectedMandala[0].value,
+    titleOfMandala: 'MandalaZ',
+    lengthOfTitle: 99,
+    dotsMode: false,
+    gridMode: false,
+    gridModeForDots: false,
+    borderMode: true,
+    borderColor: -1,
+    numberMode: false,
+    visibleColors: [true, true, true, true, true, true, true, true, true, true],
+    secondColorMode: false,
+    grayMode: false,
+    secondGrayMode: false,
+    switchMode: this.supportUtilsService.modeSwitcher
   };
 
   // обзор и манипуляции с визуализацией цветов
-  private vis_colors_sw = new BehaviorSubject<visibleColors>(this.history_default.visible_colors);
-  public visible_colors$ = this.vis_colors_sw.asObservable();
+  private visibleColorsBehaviorSubject = new BehaviorSubject<visibleColors>(this.historyDefault.visibleColors);
+  public visibleColors$ = this.visibleColorsBehaviorSubject.asObservable();
 
   // обзор и манипуляции с введенным title
-  private title_input = new BehaviorSubject<string>(this.history_default.title_of_mandala);
-  public title_input$ = this.title_input.asObservable();
+  private titleBehaviorSubject = new BehaviorSubject<string>(this.historyDefault.titleOfMandala);
+  public titleInput$ = this.titleBehaviorSubject.asObservable();
 
   // изменение видимости цветов (без параметров переключает видимые с невидимыми)
   public visColorAll(switcher: boolean | undefined) {
-    for (let idx = 0; idx < this.history_default.visible_colors.length; idx++) {
-        this.history_default.visible_colors[idx] = switcher ?? !this.history_default.visible_colors[idx];
+    for (let idx = 0; idx < this.historyDefault.visibleColors.length; idx++) {
+        this.historyDefault.visibleColors[idx] = switcher ?? !this.historyDefault.visibleColors[idx];
     }
-    this.vis_colors_sw.next(this.history_default.visible_colors);
+    this.visibleColorsBehaviorSubject.next(this.historyDefault.visibleColors);
   }
 }

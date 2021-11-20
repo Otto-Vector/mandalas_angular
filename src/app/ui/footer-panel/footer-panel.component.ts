@@ -13,8 +13,8 @@ export class FooterPanelComponent implements OnInit {
     private selected : SelectService,
     private history : HistoryService) { }
 
-  selected_value : SelectedValue [] = this.selected.selected_mandala
-  select_now : string = this.history.history_default.selected_mandala
+  selected_value : SelectedValue [] = this.selected.selectedMandala
+  select_now : string = this.history.historyDefault.selectedMandala
 
   ngOnInit(): void {
     // console.log(this.select_now)

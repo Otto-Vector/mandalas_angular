@@ -8,7 +8,7 @@
 
      [ngClass]="[
       class_name,
-      localButton.unactive_visual_mode ? unactive_visual_mode : ''
+      localButton.inactiveVisualMode ? unactive_visual_mode : ''
      ]"
 
     (click)="action.buttonListener(localButton)"

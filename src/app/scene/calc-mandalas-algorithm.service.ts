@@ -32,9 +32,9 @@ export class CalcMandalasAlgorithmService {
 
         fibbo_number = matrix[y-1][x] + matrix[ y ][x-1] + matrix[y-1][x-1]
         fibbo_number = !eleven ?
-          this.support.to_one_fibbonachi_digit(fibbo_number)
+          this.support.toOneFibonacciDigit(fibbo_number)
           :
-          this.support.to_one_eleven_digit(fibbo_number)
+          this.support.toOneElevenDigit(fibbo_number)
 
         matrix[y].push(fibbo_number)
       }

@@ -33,7 +33,7 @@ export class VisualConstructorsService {
           this.color_material_set(schema)
         })
     ////подписка на изменения параметров визуальности
-    this.subs_for_color_visual = history.visible_colors$.subscribe((visibles) =>{
+    this.subs_for_color_visual = history.visibleColors$.subscribe((visibles) =>{
       for (let [colornum,bool] of visibles.entries()) {
         this.unvis(colornum,bool)
       }
@@ -147,7 +147,7 @@ export class VisualConstructorsService {
   //добавляет объекты на сцену
   public add_mandala(scene : Scene) {
     // let numsArray : number[] = [0,1,2,3,4,5]
-    let numsArray : number[] = this.inputStringSrv.to_array_of_numbers(this.history.getTitle)
+    let numsArray : number[] = this.inputStringSrv.toArrayOfNumbers(this.history.getTitle)
     numsArray.unshift(numsArray.reduce((a,b) => (a+b)%9 || 9 ))
     this.axis  = this.axis_visual(numsArray)
     this.plane = this.plain_x_cube_visual(
